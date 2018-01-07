@@ -36,6 +36,7 @@ public class FLogin extends AppCompatActivity {
                 txt.setText("Login success  \n " +
                     loginResult.getAccessToken().getUserId() +
                     loginResult.getAccessToken().getToken());
+                // get login name, email ...
             }
 
             @Override
