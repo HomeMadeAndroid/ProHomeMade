@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1086652095611",
+    "project_id": "thermal-circle-190414"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1086652095611:android:af7f0fb65fa60025",
+        "android_client_info": {
+          "package_name": "com.example.manel.prohomemade"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1086652095611-9rb83lv18pa0vg22nkria85hq13b59s0.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "1086652095611-20bpa7et0mci8jlfuobc6rteqfast7if.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.manel.prohomemade",
+            "certificate_hash": "130e7568e287f03bb4debb00ccb6c7a5c84a8202"
+          }
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAb6wy2vSFuhgE0BuOZDeRG_CHXZMVn1DE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
