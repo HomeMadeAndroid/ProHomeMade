@@ -34,4 +34,13 @@
     <string name="design">Design :</string>
     <string name="designtxt">Design...</string>
     <string name="prompt_tel">Téléphone</string>
+
+
+    <string-array name="labels_array">
+        <item>Home</item>
+        <item>Work</item>
+        <item>Mobile</item>
+        <item>Other</item>
+    </string-array>
+
 </resources>
