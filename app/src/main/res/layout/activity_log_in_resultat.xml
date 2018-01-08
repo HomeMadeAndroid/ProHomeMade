@@ -10,7 +10,7 @@
         android:id="@+id/profilePic"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:contentDescription="TODO"
+        android:contentDescription="@string/profile_image"
         android:src="@drawable/profilpicv1" />
 
     <LinearLayout
@@ -45,7 +45,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="LogOut" />
+            android:text="@string/logout" />
 
     </LinearLayout>
 

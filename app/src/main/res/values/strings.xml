@@ -27,4 +27,10 @@
     <string name="navezpascompte2">Inscrivez-vous</string>
     <string name="outext">---------- ou ----------</string>
     <string name="name_display_here">Name display Here</string>
+    <string name="logout">LogOut</string>
+    <string name="profile_image">profile image</string>
+    <string name="id">Id :</string>
+    <string name="idtxt">Id...</string>
+    <string name="design">Design :</string>
+    <string name="designtxt">Design...</string>
 </resources>

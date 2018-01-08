@@ -39,7 +39,7 @@ public class RecyclerViewAdapter extends  RecyclerView.Adapter<RecyclerViewAdapt
     @Override
     public void onBindViewHolder(RecyclerViewAdapter.ViewHolder holder, int position) {
         Pays pays = listPays.get(position);
-        holder.txtId.setText(pays.getId());
+        holder.txtId.setText(String.valueOf(pays.getId()));
         holder.txtDesign.setText(pays.getDesign());
     }
 

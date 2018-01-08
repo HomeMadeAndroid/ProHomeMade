@@ -14,17 +14,17 @@
         android:id="@+id/id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textStyle="bold"
-        android:text="Id :  "
-        android:textColor="@android:color/black" />
+        android:text="@string/id"
+        android:textColor="@android:color/black"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/txtId"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textStyle="bold"
-        android:text=" Id... "
-        android:textColor="@android:color/black" />
+        android:text="@string/idtxt"
+        android:textColor="@android:color/black"
+        android:textStyle="bold" />
     </LinearLayout>
 
     <LinearLayout
@@ -35,17 +35,17 @@
         android:id="@+id/design"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textStyle="bold"
-        android:text="Design : "
-        android:textColor="@android:color/black" />
+        android:text="@string/design"
+        android:textColor="@android:color/black"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/txtDesign"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textStyle="bold"
-        android:text=" Design... "
-        android:textColor="@android:color/black" />
+        android:text="@string/designtxt"
+        android:textColor="@android:color/black"
+        android:textStyle="bold" />
 
     </LinearLayout>
 
