@@ -8,8 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.manel.prohomemade.FLogin;
-import com.example.manel.prohomemade.GLogin;
+import com.example.manel.prohomemade.Logactivity;
 import com.example.manel.prohomemade.R;
 import com.example.manel.prohomemade.model.Pays;
 
@@ -63,7 +62,7 @@ public class RecyclerViewAdapter extends  RecyclerView.Adapter<RecyclerViewAdapt
 
         @Override
         public void onClick(View v) {
-            Intent intent = new Intent(context, FLogin.class);
+            Intent intent = new Intent(context, Logactivity.class);
             context.startActivity(intent);
         }
     }
