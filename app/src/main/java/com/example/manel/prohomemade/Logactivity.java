@@ -136,4 +136,11 @@ public class Logactivity extends AppCompatActivity implements View.OnClickListen
         }
 
     }
+
+    public void Inscri(View view) {
+        Intent intent = new Intent(Logactivity.this, LogInResultat.class);
+        //intent.putExtra("email", name);
+        // intent.putExtra("password", email);
+        startActivity(intent);
+    }
 }

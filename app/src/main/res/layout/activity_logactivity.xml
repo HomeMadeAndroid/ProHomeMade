@@ -147,6 +147,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="5dp"
                     android:gravity="center"
+                    android:onClick="Inscri"
                     android:singleLine="false"
                     android:text="@string/navezpascompte2"
                     android:textAlignment="center"

@@ -29,7 +29,8 @@
             android:value="@string/facebook_app_id" />
 
         <activity android:name=".Logactivity" />
-        <activity android:name=".LogInResultat"></activity>
+        <activity android:name=".LogInResultat" />
+        <activity android:name=".SignIn"></activity>
     </application>
 
 </manifest>
