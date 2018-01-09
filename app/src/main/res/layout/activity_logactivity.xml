@@ -92,7 +92,7 @@
                     android:layout_height="wrap_content">
 
                     <AutoCompleteTextView
-                        android:id="@+id/txtSignInemail"
+                        android:id="@+id/txtLogInemail"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
@@ -107,7 +107,7 @@
                     android:layout_height="wrap_content">
 
                     <EditText
-                        android:id="@+id/txtSignInpassword"
+                        android:id="@+id/txtLogInpassword"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/prompt_password"
@@ -126,10 +126,11 @@
                     android:layout_height="@dimen/buttonheight"
                     android:layout_marginTop="16dp"
                     android:background="@color/colorpicker1"
+                    android:drawableLeft="@android:drawable/ic_menu_send"
+                    android:onClick="Register"
                     android:paddingBottom="10dp"
                     android:text="@string/action_sign_in"
-                    android:textStyle="bold"
-                    tools:drawableLeft="@android:drawable/ic_secure" />
+                    android:textStyle="bold" />
 
                 <TextView
                     android:layout_width="wrap_content"

@@ -4,8 +4,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
-import android.widget.TextView;
+import android.widget.AutoCompleteTextView;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
@@ -26,8 +29,9 @@ public class Logactivity extends AppCompatActivity implements View.OnClickListen
 
     private static final int REC_CODE = 9001;
     LoginButton loginButton;
-    TextView txt;
     CallbackManager callbackManager;
+    AutoCompleteTextView txtEmail;
+    EditText txtpsw;
     private GoogleApiClient googleApiClient;
     private SignInButton btnSignin;
 
@@ -37,6 +41,11 @@ public class Logactivity extends AppCompatActivity implements View.OnClickListen
         FacebookSdk.sdkInitialize(getApplicationContext());
         setContentView(R.layout.activity_logactivity);
 
+        // callbackManager = new CallbackManager.Factory().create();
+
+        txtEmail = (AutoCompleteTextView) findViewById(R.id.txtLogInemail);
+        txtpsw = (EditText) findViewById(R.id.txtLogInpassword);
+
         btnSignin = (SignInButton) findViewById(R.id.btngLogin);
         btnSignin.setOnClickListener(this);
         GoogleSignInOptions signInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
@@ -44,14 +53,12 @@ public class Logactivity extends AppCompatActivity implements View.OnClickListen
 
 
         loginButton = (LoginButton) findViewById(R.id.btnflogin);
-        //txt = (TextView)findViewById(R.id.txtloginstatus);
-        callbackManager = CallbackManager.Factory.create();
+        callbackManager = new CallbackManager.Factory().create();
+        //callbackManager = CallbackManager.Factory.create();
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
                 Profile profile = Profile.getCurrentProfile();
-
-
                 Intent intent = new Intent(Logactivity.this, LogInResultat.class);
                 intent.putExtra("name", profile.getName());
                 intent.putExtra("imgUrl", profile.getProfilePictureUri(100, 100).toString());
@@ -63,7 +70,7 @@ public class Logactivity extends AppCompatActivity implements View.OnClickListen
 
             @Override
             public void onCancel() {
-                txt.setText("Login canceled");
+                Toast.makeText(getApplicationContext(), "Connect Canceled", Toast.LENGTH_SHORT);
             }
 
             @Override
@@ -75,25 +82,14 @@ public class Logactivity extends AppCompatActivity implements View.OnClickListen
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.btngLogin:
-                signIn();
-                break;
-            /*case R.id.btnLogout:
-                //signOut();
-                break;*/
-        }
+        Intent intent = Auth.GoogleSignInApi.getSignInIntent(googleApiClient);
+        startActivityForResult(intent, REC_CODE);
 
     }
 
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
 
-    }
-
-    private void signIn() {
-        Intent intent = Auth.GoogleSignInApi.getSignInIntent(googleApiClient);
-        startActivityForResult(intent, REC_CODE);
     }
 
     /*private void signOut(){
@@ -111,7 +107,7 @@ public class Logactivity extends AppCompatActivity implements View.OnClickListen
             String name = account.getDisplayName();
             String email = account.getEmail();
             String imgUrl = null;
-            if(account.getPhotoUrl()!=null){
+            if (account.getPhotoUrl() != null) {
                 imgUrl = account.getPhotoUrl().toString();
             }
             Intent intent = new Intent(Logactivity.this, LogInResultat.class);
@@ -119,12 +115,8 @@ public class Logactivity extends AppCompatActivity implements View.OnClickListen
             intent.putExtra("email", email);
             intent.putExtra("imgUrl", imgUrl);
             startActivity(intent);
-            //txtName.setText(name);
-            //txtEmail.setText(email);
-            //Glide.with(this).load(imgUrl).into(profilePic);
-            //updateUI(true);
         } else {
-            //updateUI(false);
+            Log.d("GoogleSignIn ", " Resultat");
         }
     }
 
@@ -142,8 +134,15 @@ public class Logactivity extends AppCompatActivity implements View.OnClickListen
 
     public void Inscri(View view) {
         Intent intent = new Intent(Logactivity.this, SignIn.class);
-        //intent.putExtra("email", name);
-        // intent.putExtra("password", email);
+        startActivity(intent);
+    }
+
+    public void Register(View view) {
+        String imgUrl = null;
+        Intent intent = new Intent(Logactivity.this, LogInResultat.class);
+        intent.putExtra("email", txtEmail.getText().toString());
+        intent.putExtra("name", txtpsw.getText().toString());
+        intent.putExtra("imgUrl", imgUrl);
         startActivity(intent);
     }
 }
