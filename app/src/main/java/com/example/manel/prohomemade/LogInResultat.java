@@ -26,11 +26,17 @@ public class LogInResultat extends AppCompatActivity {
         if (b != null) {
             String name = (String) b.get("name");
             //String email =(String) b.get("email");
-            String imgUrl = (String) b.get("imgUrl");
+            if(b.get("imgUrl") != null){
+                String imgUrl = (String) b.get("imgUrl");
+                Glide.with(this).load(imgUrl).into(profilePic);
+            }else{
+                Glide.with(this).load(R.drawable.profilpicv1).into(profilePic);
+            }
+
             txtName.setText(name);
             txtName.setText(name);
             //txtEmail.setText(email);
-            Glide.with(this).load(imgUrl).into(profilePic);
+
         }
     }
 }

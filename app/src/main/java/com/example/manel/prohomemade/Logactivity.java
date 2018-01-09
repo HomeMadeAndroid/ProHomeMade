@@ -110,7 +110,10 @@ public class Logactivity extends AppCompatActivity implements View.OnClickListen
             GoogleSignInAccount account = result.getSignInAccount();
             String name = account.getDisplayName();
             String email = account.getEmail();
-            String imgUrl = account.getPhotoUrl().toString();
+            String imgUrl = null;
+            if(account.getPhotoUrl()!=null){
+                imgUrl = account.getPhotoUrl().toString();
+            }
             Intent intent = new Intent(Logactivity.this, LogInResultat.class);
             intent.putExtra("name", name);
             intent.putExtra("email", email);

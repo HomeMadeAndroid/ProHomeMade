@@ -17,7 +17,7 @@ public interface APIService {
     //change the url accoding to your system IP Address
     //invite de commande -> ipconfig
     //wifi section adresse vpI4
-    String dbURL="http://192.168.1.100/proHMcrud/";
+    String dbURL="http://192.168.8.100/proHMcrud/";
 
     @GET("view.php")
     Call<ListPays> getAllPays();
