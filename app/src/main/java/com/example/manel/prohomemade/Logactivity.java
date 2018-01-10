@@ -28,6 +28,7 @@ import com.google.android.gms.common.api.GoogleApiClient;
 public class Logactivity extends AppCompatActivity implements View.OnClickListener, GoogleApiClient.OnConnectionFailedListener {
 
     private static final int REC_CODE = 9001;
+    //private static final int fREC_CODE = 1001;
     LoginButton loginButton;
     CallbackManager callbackManager;
     AutoCompleteTextView txtEmail;
@@ -62,10 +63,7 @@ public class Logactivity extends AppCompatActivity implements View.OnClickListen
                 Intent intent = new Intent(Logactivity.this, LogInResultat.class);
                 intent.putExtra("name", profile.getName());
                 intent.putExtra("imgUrl", profile.getProfilePictureUri(100, 100).toString());
-                //intent.putExtra("email", profile.getLastName());
-
                 startActivity(intent);
-                // get login name, email ...
             }
 
             @Override
@@ -75,7 +73,7 @@ public class Logactivity extends AppCompatActivity implements View.OnClickListen
 
             @Override
             public void onError(FacebookException error) {
-
+                Toast.makeText(getApplicationContext(), error.getMessage().toString(), Toast.LENGTH_SHORT);
             }
         });
     }
@@ -129,8 +127,12 @@ public class Logactivity extends AppCompatActivity implements View.OnClickListen
         } else {
             callbackManager.onActivityResult(requestCode, resultCode, data);
         }
-
-    }
+        /* else if(requestCode == fREC_CODE){
+            callbackManager.onActivityResult(requestCode, resultCode, data);
+        } else {
+            Log.d("failed to connect", "no fcb no google");
+        }*/
+        }
 
     public void Inscri(View view) {
         Intent intent = new Intent(Logactivity.this, SignIn.class);
