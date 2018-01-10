@@ -40,12 +40,53 @@
             android:text="Email display Here"
             android:textStyle="bold" />
 
-        <Button
-            android:id="@+id/btnLogout"
+        <LinearLayout
+            android:id="@+id/googleSection"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="@string/logout" />
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/btnLogout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/logout" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/facebookSection"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <com.facebook.login.widget.LoginButton
+                android:id="@+id/btnflogin"
+                android:layout_width="150dp"
+                android:layout_height="50dp"
+                android:paddingBottom="10dp"
+                android:text="Facebook"
+                android:textStyle="bold"></com.facebook.login.widget.LoginButton>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/btnSection"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/signoutButton"
+                style="?android:textAppearanceSmall"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/buttonheight"
+                android:layout_marginTop="16dp"
+                android:background="@color/colorpicker1"
+                android:paddingBottom="10dp"
+                android:text="@string/action_sign_out"
+                android:textStyle="bold" />
+            <!--android:drawableLeft="@android:drawable/ic_menu_send"-->
+        </LinearLayout>
 
     </LinearLayout>
 

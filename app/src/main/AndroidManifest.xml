@@ -30,7 +30,11 @@
 
         <activity android:name=".Logactivity" />
         <activity android:name=".LogInResultat" />
-        <activity android:name=".SignIn"></activity>
+        <activity android:name=".SignIn" />
+        <activity
+            android:name=".Connected"
+            android:label="@string/title_activity_connected"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

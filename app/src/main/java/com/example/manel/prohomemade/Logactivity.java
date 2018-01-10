@@ -63,6 +63,7 @@ public class Logactivity extends AppCompatActivity implements View.OnClickListen
                 Intent intent = new Intent(Logactivity.this, LogInResultat.class);
                 intent.putExtra("name", profile.getName());
                 intent.putExtra("imgUrl", profile.getProfilePictureUri(100, 100).toString());
+                intent.putExtra("account", "Facebook");
                 startActivity(intent);
             }
 
@@ -112,6 +113,7 @@ public class Logactivity extends AppCompatActivity implements View.OnClickListen
             intent.putExtra("name", name);
             intent.putExtra("email", email);
             intent.putExtra("imgUrl", imgUrl);
+            intent.putExtra("account", "Google");
             startActivity(intent);
         } else {
             Log.d("GoogleSignIn ", " Resultat");
@@ -139,12 +141,13 @@ public class Logactivity extends AppCompatActivity implements View.OnClickListen
         startActivity(intent);
     }
 
-    public void Register(View view) {
+    public void SignInbtn(View view) {
         String imgUrl = null;
         Intent intent = new Intent(Logactivity.this, LogInResultat.class);
         intent.putExtra("email", txtEmail.getText().toString());
         intent.putExtra("name", txtpsw.getText().toString());
         intent.putExtra("imgUrl", imgUrl);
+        intent.putExtra("account", "btn");
         startActivity(intent);
     }
 }

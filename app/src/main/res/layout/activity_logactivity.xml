@@ -127,7 +127,7 @@
                     android:layout_marginTop="16dp"
                     android:background="@color/colorpicker1"
                     android:drawableLeft="@android:drawable/ic_menu_send"
-                    android:onClick="Register"
+                    android:onClick="SignInbtn"
                     android:paddingBottom="10dp"
                     android:text="@string/action_sign_in"
                     android:textStyle="bold" />
