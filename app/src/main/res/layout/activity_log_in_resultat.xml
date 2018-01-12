@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/bgcolor"
     android:orientation="horizontal"
     tools:context="com.example.manel.prohomemade.LogInResultat">
 
@@ -47,11 +48,14 @@
             android:orientation="vertical">
 
             <Button
-                android:id="@+id/btnLogout"
+                android:id="@+id/btngLogout"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/buttonheight"
+                android:background="@color/btncolor"
+                android:drawableLeft="@drawable/com_facebook_close"
                 android:gravity="center"
-                android:text="@string/logout" />
+                android:text="@string/logout"
+                android:textColor="@color/bgcolor" />
         </LinearLayout>
 
         <LinearLayout
@@ -60,13 +64,15 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <com.facebook.login.widget.LoginButton
-                android:id="@+id/btnflogin"
-                android:layout_width="150dp"
-                android:layout_height="50dp"
-                android:paddingBottom="10dp"
-                android:text="Facebook"
-                android:textStyle="bold"></com.facebook.login.widget.LoginButton>
+            <Button
+                android:id="@+id/btnfLogout"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/buttonheight"
+                android:background="@color/btncolor"
+                android:drawableLeft="@drawable/com_facebook_close"
+                android:gravity="center"
+                android:text="@string/logout"
+                android:textColor="@color/bgcolor" />
         </LinearLayout>
 
         <LinearLayout
@@ -76,15 +82,14 @@
             android:orientation="vertical">
 
             <Button
-                android:id="@+id/signoutButton"
-                style="?android:textAppearanceSmall"
+                android:id="@+id/btnLogout"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/buttonheight"
-                android:layout_marginTop="16dp"
-                android:background="@color/colorpicker1"
-                android:paddingBottom="10dp"
+                android:background="@color/btncolor"
+                android:drawableLeft="@drawable/com_facebook_close"
+                android:gravity="center"
                 android:text="@string/action_sign_out"
-                android:textStyle="bold" />
+                android:textColor="@color/bgcolor" />
             <!--android:drawableLeft="@android:drawable/ic_menu_send"-->
         </LinearLayout>
 

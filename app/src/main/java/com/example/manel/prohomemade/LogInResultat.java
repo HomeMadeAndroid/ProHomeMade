@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.facebook.login.LoginManager;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.ConnectionResult;
@@ -25,7 +26,7 @@ public class LogInResultat extends AppCompatActivity implements View.OnClickList
     private TextView txtName;
     private TextView txtEmail;
     private ImageView profilePic;
-    private Button btnSignout;
+    private Button btngSignout, btnfSignout, btnSignout;
     private GoogleApiClient googleApiClient;
     private String account = "";
     private LinearLayout googleSection;
@@ -48,6 +49,10 @@ public class LogInResultat extends AppCompatActivity implements View.OnClickList
         GoogleSignInOptions signInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
         googleApiClient = new GoogleApiClient.Builder(this).enableAutoManage(this, this).addApi(Auth.GOOGLE_SIGN_IN_API, signInOptions).build();
 
+        btngSignout = (Button) findViewById(R.id.btngLogout);
+        btngSignout.setOnClickListener(this);
+        btnfSignout = (Button) findViewById(R.id.btnfLogout);
+        btnfSignout.setOnClickListener(this);
         btnSignout = (Button) findViewById(R.id.btnLogout);
         btnSignout.setOnClickListener(this);
 
@@ -61,19 +66,7 @@ public class LogInResultat extends AppCompatActivity implements View.OnClickList
             String email = (String) b.get("email");
             account = (String) b.get("account");
             Log.d("account : ", account);
-            if (account.equalsIgnoreCase("Google")) {
-                googleSection.setVisibility(View.VISIBLE);
-                fcbSection.setVisibility(View.INVISIBLE);
-                btnSection.setVisibility(View.INVISIBLE);
-            } else if (account.equalsIgnoreCase("Facebook")) {
-                fcbSection.setVisibility(View.VISIBLE);
-                googleSection.setVisibility(View.INVISIBLE);
-                btnSection.setVisibility(View.INVISIBLE);
-            } else if (account.equalsIgnoreCase("btn")) {
-                btnSection.setVisibility(View.VISIBLE);
-                googleSection.setVisibility(View.INVISIBLE);
-                fcbSection.setVisibility(View.INVISIBLE);
-            }
+            btnVisivility(account);
             if (b.get("imgUrl") != null) {
                 String imgUrl = (String) b.get("imgUrl");
                 Glide.with(this).load(imgUrl).into(profilePic);
@@ -82,31 +75,55 @@ public class LogInResultat extends AppCompatActivity implements View.OnClickList
             }
             txtName.setText(name);
             txtName.setText(name);
+            Toast.makeText(getApplicationContext(), email, Toast.LENGTH_LONG);
             txtEmail.setText(email);
         }
     }
 
-
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.btngLogout:
+                signOutGoogle();
+                break;
+            case R.id.btnfLogout:
+                signOutFcb();
+                break;
             case R.id.btnLogout:
                 signOut();
                 break;
         }
     }
 
-    /*public  void AccountChoise(String acc){
-        if(acc == "Google"){
-            googleSection.setVisibility(View.VISIBLE);
-            fcbSection.setVisibility(View.GONE);
-        }else if(acc == "Facebook"){
-            googleSection.setVisibility(View.GONE);
-            fcbSection.setVisibility(View.VISIBLE);
-        }
-    }*/
-
     private void signOut() {
+        LoginManager.getInstance().logOut();
+        Intent login = new Intent(getApplicationContext(), MainActivity.class);
+        startActivity(login);
+        finish();
+    }
+
+    private void signOutFcb() {
+        Intent login = new Intent(getApplicationContext(), MainActivity.class);
+        startActivity(login);
+    }
+
+    public void btnVisivility(String account) {
+        if (account.equalsIgnoreCase("Google")) {
+            googleSection.setVisibility(View.VISIBLE);
+            fcbSection.setVisibility(View.INVISIBLE);
+            btnSection.setVisibility(View.INVISIBLE);
+        } else if (account.equalsIgnoreCase("Facebook")) {
+            fcbSection.setVisibility(View.VISIBLE);
+            googleSection.setVisibility(View.INVISIBLE);
+            btnSection.setVisibility(View.INVISIBLE);
+        } else if (account.equalsIgnoreCase("btn")) {
+            btnSection.setVisibility(View.VISIBLE);
+            googleSection.setVisibility(View.INVISIBLE);
+            fcbSection.setVisibility(View.INVISIBLE);
+        }
+    }
+
+    private void signOutGoogle() {
         Auth.GoogleSignInApi.signOut(googleApiClient).setResultCallback(new ResultCallback<Status>() {
             @Override
             public void onResult(@NonNull Status status) {
@@ -119,6 +136,6 @@ public class LogInResultat extends AppCompatActivity implements View.OnClickList
 
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-
+        Toast.makeText(getApplicationContext(), "Connection Failed", Toast.LENGTH_SHORT);
     }
 }

@@ -14,6 +14,8 @@ import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
 import com.facebook.Profile;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
@@ -25,7 +27,10 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.GoogleApiClient;
 
-public class Logactivity extends AppCompatActivity implements View.OnClickListener, GoogleApiClient.OnConnectionFailedListener {
+import org.json.JSONException;
+import org.json.JSONObject;
+
+public class Logactivity extends AppCompatActivity implements View.OnClickListener, GoogleApiClient.OnConnectionFailedListener, GraphRequest.GraphJSONObjectCallback {
 
     private static final int REC_CODE = 9001;
     //private static final int fREC_CODE = 1001;
@@ -33,6 +38,7 @@ public class Logactivity extends AppCompatActivity implements View.OnClickListen
     CallbackManager callbackManager;
     AutoCompleteTextView txtEmail;
     EditText txtpsw;
+    String em = "n";
     private GoogleApiClient googleApiClient;
     private SignInButton btnSignin;
 
@@ -54,17 +60,39 @@ public class Logactivity extends AppCompatActivity implements View.OnClickListen
 
 
         loginButton = (LoginButton) findViewById(R.id.btnflogin);
+        loginButton.setReadPermissions("email");
         callbackManager = new CallbackManager.Factory().create();
         //callbackManager = CallbackManager.Factory.create();
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
-                Profile profile = Profile.getCurrentProfile();
-                Intent intent = new Intent(Logactivity.this, LogInResultat.class);
-                intent.putExtra("name", profile.getName());
-                intent.putExtra("imgUrl", profile.getProfilePictureUri(100, 100).toString());
-                intent.putExtra("account", "Facebook");
-                startActivity(intent);
+
+
+                GraphRequest request = GraphRequest.newMeRequest(
+                        loginResult.getAccessToken(),
+                        new GraphRequest.GraphJSONObjectCallback() {
+
+                            @Override
+                            public void onCompleted(JSONObject object, GraphResponse response) {
+                                Log.v("Main", response.toString());
+                                try {
+                                    Profile profile = Profile.getCurrentProfile();
+                                    Intent intent = new Intent(Logactivity.this, LogInResultat.class);
+                                    intent.putExtra("name", profile.getName());
+
+                                    intent.putExtra("email", response.getJSONObject().getString("email"));
+                                    intent.putExtra("imgUrl", profile.getProfilePictureUri(100, 100).toString());
+                                    intent.putExtra("account", "Facebook");
+                                    startActivity(intent);
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        });
+                Bundle parameters = new Bundle();
+                parameters.putString("fields", "id,name,email,birthday,address");
+                request.setParameters(parameters);
+                request.executeAsync();
             }
 
             @Override
@@ -149,5 +177,11 @@ public class Logactivity extends AppCompatActivity implements View.OnClickListen
         intent.putExtra("imgUrl", imgUrl);
         intent.putExtra("account", "btn");
         startActivity(intent);
+    }
+
+
+    @Override
+    public void onCompleted(JSONObject object, GraphResponse response) {
+        Log.e("jsdata", object.toString());
     }
 }

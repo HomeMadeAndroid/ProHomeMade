@@ -7,6 +7,7 @@
     android:layout_centerInParent="true"
     android:layout_gravity="center"
     android:layout_marginBottom="20dp"
+    android:background="@color/bgcolor"
     android:orientation="vertical"
     tools:context="com.example.manel.prohomemade.Logactivity">
 
@@ -14,7 +15,8 @@
     <ScrollView
         android:id="@+id/scrol"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/bgcolor">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -32,7 +34,7 @@
                     android:layout_height="150dp"
                     android:layout_marginTop="5dp"
                     android:contentDescription="@string/image"
-                    android:src="@drawable/imagehm" />
+                    android:src="@drawable/hml" />
 
                 <!-- <TextView
                      android:layout_width="wrap_content"
@@ -125,11 +127,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/buttonheight"
                     android:layout_marginTop="16dp"
-                    android:background="@color/colorpicker1"
+                    android:background="@color/btncolor"
                     android:drawableLeft="@android:drawable/ic_menu_send"
                     android:onClick="SignInbtn"
                     android:paddingBottom="10dp"
                     android:text="@string/action_sign_in"
+                    android:textColor="@color/bgcolor"
                     android:textStyle="bold" />
 
                 <TextView
@@ -139,7 +142,7 @@
                     android:singleLine="false"
                     android:text="@string/navezpascompte"
                     android:textAlignment="center"
-                    android:textColor="@color/colorpicker2"
+                    android:textColor="@color/btncolor"
                     android:textSize="15sp"
                     android:textStyle="bold" />
 
@@ -152,7 +155,7 @@
                     android:singleLine="false"
                     android:text="@string/navezpascompte2"
                     android:textAlignment="center"
-                    android:textColor="@color/colorpicker2"
+                    android:textColor="@color/btncolor"
                     android:textSize="15sp"
                     android:textStyle="bold" />
 

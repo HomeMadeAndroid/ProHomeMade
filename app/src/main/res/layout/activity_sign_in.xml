@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/bgcolor"
     tools:context="com.example.manel.prohomemade.SignIn">
 
     <ScrollView
@@ -23,7 +24,7 @@
                 android:layout_height="150dp"
                 android:layout_marginTop="5dp"
                 android:contentDescription="@string/image"
-                android:src="@drawable/imagehm" />
+                android:src="@drawable/hml" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -94,21 +95,23 @@
 
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="150dp"
-                android:layout_height="wrap_content">
-                <EditText
-                    android:id="@+id/txttelSignin"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/prompt_tel"
-                    android:imeActionId="6"
-                    android:imeActionLabel="@string/action_sign_in_short"
-                    android:imeOptions="actionUnspecified"
-                    android:inputType="phone"
-                    android:maxLines="1"
-                    android:singleLine="true" />
-            </android.support.design.widget.TextInputLayout>
+                    android:layout_height="wrap_content">
+
+                    <EditText
+                        android:id="@+id/txttelSignin"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/prompt_tel"
+                        android:imeActionId="6"
+                        android:imeActionLabel="@string/action_sign_in_short"
+                        android:imeOptions="actionUnspecified"
+                        android:inputType="phone"
+                        android:maxLines="1"
+                        android:singleLine="true" />
+                </android.support.design.widget.TextInputLayout>
 
             </LinearLayout>
+
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -132,7 +135,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/buttonheight"
                 android:layout_marginTop="16dp"
-                android:background="@color/colorpicker1"
+                android:background="@color/btncolor"
                 android:onClick="SignIn"
                 android:paddingBottom="10dp"
                 android:text="@string/action_sign_in"
