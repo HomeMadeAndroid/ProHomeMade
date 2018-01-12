@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -15,6 +16,7 @@ import com.example.manel.prohomemade.service.APIService;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 
 import retrofit2.Call;
@@ -29,43 +31,37 @@ public class SignIn extends AppCompatActivity implements
     private static final String TAG = MainActivity.class.getSimpleName();
     EditText txtNom, txtPrenom, txtTel, txtEmail, txtPassword;
     Spinner spinner;
-    private String mSpinnerLabel = "";
+    ArrayList<String> listItems = new ArrayList<>();
+    ArrayAdapter<String> adapter;
+    ArrayList<String> list = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
 
-
-        // spinner = (Spinner) findViewById(R.id.sp);
-        // Create the spinner.
-        /*spinner = (Spinner) findViewById(R.id.spinnerpays);
+        spinner = (Spinner) findViewById(R.id.spinnerpays);
+        adapter = new ArrayAdapter<String>(this, R.layout.spinner_layout, R.id.txtSpineer, listItems);
+        LoadDataPays();
         if (spinner != null) {
             spinner.setOnItemSelectedListener(this);
         }
-        // Create ArrayAdapter using the string array and default spinner layout.
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                R.array.labels_array, android.R.layout.simple_spinner_item);
-
-        // Specify the layout to use when the list of choices appears.
-        adapter.setDropDownViewResource
-                (android.R.layout.simple_spinner_dropdown_item);
-        // Apply the adapter to the spinner.
-        if (spinner != null) {
-            spinner.setAdapter(adapter);
-        }*/
-
-
         txtNom = (EditText) findViewById(R.id.txtnomSignIn);
         txtPrenom = (EditText) findViewById(R.id.txtprenomSignIn);
         txtTel = (EditText) findViewById(R.id.txttelSignin);
         txtEmail = (EditText) findViewById(R.id.txtemailSignIn);
         txtPassword = (EditText) findViewById(R.id.txtpasswordSignin);
-
     }
-
+/*
+    @Override
+    protected void onStart() {
+        super.onStart();
+        BackTask bt=new BackTask();
+        bt.execute();
+    }*/
 
     public void LoadDataPays() {
+
         Gson gson = new GsonBuilder()
                 .setLenient()
                 .create();
@@ -84,13 +80,13 @@ public class SignIn extends AppCompatActivity implements
                     Pays p = ppp;
                     for (Iterator it = listOfPays.getListP().iterator(); it.hasNext(); ) {
                         ppp = (Pays) it.next();
-                        p.setId(ppp.getId());
-                        p.setDesign(ppp.getDesign());
-                        Log.e("id : ", "" + p.getId());
-                        Log.e("design: ", "" + p.getDesign());
+                        list.add(ppp.getDesign());
+                        Log.d("design: ", "" + p.getDesign());
                     }
+                    listItems.addAll(list);
+                    spinner.setAdapter(adapter);
                 } else {
-                    Toast.makeText(getApplicationContext(), "hjhj " + listOfPays.getMsg(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Failed to load data " + listOfPays.getMsg(), Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -102,18 +98,20 @@ public class SignIn extends AppCompatActivity implements
         });
     }
 
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        String ls = parent.getItemAtPosition(position).toString();
+        Toast.makeText(getApplicationContext(), ls, Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+        Toast.makeText(getApplicationContext(), "Selecte un pays", Toast.LENGTH_LONG).show();
+    }
+
 
     public void SignIn(View view) {
 
     }
 
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
-
-    }
 }

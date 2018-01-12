@@ -28,9 +28,15 @@
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
 
-        <activity android:name=".Logactivity" />
-        <activity android:name=".LogInResultat" />
-        <activity android:name=".SignIn" />
+        <activity
+            android:name=".Logactivity"
+            android:label="Authentification" />
+        <activity
+            android:name=".LogInResultat"
+            android:label="Bienvenue" />
+        <activity
+            android:name=".SignIn"
+            android:label="Inscription" />
         <activity
             android:name=".Connected"
             android:label="@string/title_activity_connected"
