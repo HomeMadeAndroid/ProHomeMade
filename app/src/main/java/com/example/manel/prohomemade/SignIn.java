@@ -41,7 +41,7 @@ public class SignIn extends AppCompatActivity implements
         setContentView(R.layout.activity_sign_in);
 
         spinner = (Spinner) findViewById(R.id.spinnerpays);
-        adapter = new ArrayAdapter<String>(this, R.layout.spinner_layout, R.id.txtSpineer, listItems);
+        adapter = new ArrayAdapter<String>(this, R.layout.spinner_layout, R.id.txtSpinnerD, listItems);
         LoadDataPays();
         if (spinner != null) {
             spinner.setOnItemSelectedListener(this);
@@ -61,7 +61,6 @@ public class SignIn extends AppCompatActivity implements
     }*/
 
     public void LoadDataPays() {
-
         Gson gson = new GsonBuilder()
                 .setLenient()
                 .create();
@@ -77,11 +76,9 @@ public class SignIn extends AppCompatActivity implements
                 ListPays listOfPays = response.body();
                 if (listOfPays.getStatus() == 1) {
                     Pays ppp = new Pays(0, " ");
-                    Pays p = ppp;
                     for (Iterator it = listOfPays.getListP().iterator(); it.hasNext(); ) {
                         ppp = (Pays) it.next();
                         list.add(ppp.getDesign());
-                        Log.d("design: ", "" + p.getDesign());
                     }
                     listItems.addAll(list);
                     spinner.setAdapter(adapter);
@@ -108,7 +105,6 @@ public class SignIn extends AppCompatActivity implements
     public void onNothingSelected(AdapterView<?> parent) {
         Toast.makeText(getApplicationContext(), "Selecte un pays", Toast.LENGTH_LONG).show();
     }
-
 
     public void SignIn(View view) {
 
