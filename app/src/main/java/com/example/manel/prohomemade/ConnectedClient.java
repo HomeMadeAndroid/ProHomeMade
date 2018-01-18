@@ -14,17 +14,20 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-public class Connected extends AppCompatActivity
+import com.bumptech.glide.Glide;
+
+public class ConnectedClient extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     TextView txtName, txtEmail;
+    private ImageView profilePic;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_connected);
+        setContentView(R.layout.activity_connectedclient);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -47,6 +50,7 @@ public class Connected extends AppCompatActivity
         View headerView = navigationView.getHeaderView(0);
         txtName = (TextView) headerView.findViewById(R.id.txtclientname);
         txtEmail = (TextView) headerView.findViewById(R.id.txtclientmail);
+        profilePic = (ImageView) headerView.findViewById(R.id.profilpic);
         navigationView.setNavigationItemSelectedListener(this);
         Intent intent = getIntent();
         Bundle b = intent.getExtras();
@@ -59,24 +63,13 @@ public class Connected extends AppCompatActivity
             txtEmail.setText(email);
             //account = (String) b.get("account");
             // btnVisivility(account);
-            /*if (b.get("imgUrl") != null) {
+            if (b.get("imgUrl") != null) {
                 String imgUrl = (String) b.get("imgUrl");
                 Glide.with(this).load(imgUrl).into(profilePic);
             } else {
-                Glide.with(this).load(R.drawable.profilpic).into(profilePic);
-            }*/
-
-            Toast.makeText(getApplicationContext(), email, Toast.LENGTH_LONG);
-
+                Glide.with(this).load(R.drawable.homemade101).into(profilePic);
+            }
         }
-
-        /*
-
-View headerView = navigationView.getHeaderView(0);
-navUsername = (TextView) headerView.findViewById(R.id.navUsername);
-navUsernam.setText("Your Text Here");
-
-         */
     }
 
     @Override
@@ -92,7 +85,7 @@ navUsernam.setText("Your Text Here");
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.connected, menu);
+        getMenuInflater().inflate(R.menu.connectedclient, menu);
         return true;
     }
 

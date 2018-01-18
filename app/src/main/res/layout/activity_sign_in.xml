@@ -129,6 +129,15 @@
                     android:singleLine="true" />
             </android.support.design.widget.TextInputLayout>
 
+            <Switch
+                android:id="@+id/switch1"
+                android:layout_width="wrap_content"
+                android:layout_height="10dp"
+                android:layout_marginBottom="5dp"
+                android:checked="true"
+                android:textOff="Artisant"
+                android:textOn="Client" />
+
             <Button
                 android:id="@+id/email_sign_in_button"
                 style="?android:textAppearanceSmall"

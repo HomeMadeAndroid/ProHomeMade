@@ -30,4 +30,14 @@ public interface APIService {
                               @Field("tel") int tel,
                               @Field("password") String password,
                               @Field("dPay") String dPay);
+
+    @FormUrlEncoded
+    @POST("insertArtisant.php")
+    Call<String> CreateArtisant(@Field("nom") String nom,
+                                @Field("prenom") String prenom,
+                                @Field("email") String email,
+                                @Field("tel") int tel,
+                                @Field("password") String password,
+                                @Field("adr") String adr,
+                                @Field("matfisc") String matfisc);
 }

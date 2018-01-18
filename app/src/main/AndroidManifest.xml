@@ -38,7 +38,7 @@
             android:name=".SignIn"
             android:label="Inscription" />
         <activity
-            android:name=".Connected"
+            android:name=".ConnectedClient"
             android:label="@string/title_activity_connected"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>

@@ -59,6 +59,7 @@ public class Logactivity extends AppCompatActivity implements View.OnClickListen
         googleApiClient = new GoogleApiClient.Builder(this).enableAutoManage(this, this).addApi(Auth.GOOGLE_SIGN_IN_API, signInOptions).build();
 
 
+        //******************* Facebook ******************
         loginButton = (LoginButton) findViewById(R.id.btnflogin);
         loginButton.setReadPermissions("email");
         callbackManager = new CallbackManager.Factory().create();
@@ -66,18 +67,15 @@ public class Logactivity extends AppCompatActivity implements View.OnClickListen
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
-
-
                 GraphRequest request = GraphRequest.newMeRequest(
                         loginResult.getAccessToken(),
                         new GraphRequest.GraphJSONObjectCallback() {
-
                             @Override
                             public void onCompleted(JSONObject object, GraphResponse response) {
                                 Log.v("Main", response.toString());
                                 try {
                                     Profile profile = Profile.getCurrentProfile();
-                                    Intent intent = new Intent(Logactivity.this, LogInResultat.class);
+                                    Intent intent = new Intent(Logactivity.this, ConnectedClient.class);
                                     intent.putExtra("name", profile.getName());
 
                                     intent.putExtra("email", response.getJSONObject().getString("email"));
@@ -119,15 +117,6 @@ public class Logactivity extends AppCompatActivity implements View.OnClickListen
 
     }
 
-    /*private void signOut(){
-        Auth.GoogleSignInApi.signOut(googleApiClient).setResultCallback(new ResultCallback<Status>() {
-            @Override
-            public void onResult(@NonNull Status status) {
-                //updateUI(false);
-            }
-        });
-    }*/
-
     private void handleResult(GoogleSignInResult result) {
         if (result.isSuccess()) {
             GoogleSignInAccount account = result.getSignInAccount();
@@ -137,7 +126,7 @@ public class Logactivity extends AppCompatActivity implements View.OnClickListen
             if (account.getPhotoUrl() != null) {
                 imgUrl = account.getPhotoUrl().toString();
             }
-            Intent intent = new Intent(Logactivity.this, LogInResultat.class);
+            Intent intent = new Intent(Logactivity.this, ConnectedClient.class);
             intent.putExtra("name", name);
             intent.putExtra("email", email);
             intent.putExtra("imgUrl", imgUrl);
@@ -171,11 +160,11 @@ public class Logactivity extends AppCompatActivity implements View.OnClickListen
 
     public void SignInbtn(View view) {
         String imgUrl = null;
-        Intent intent = new Intent(Logactivity.this, Connected.class);
+        Intent intent = new Intent(Logactivity.this, ConnectedClient.class);
         intent.putExtra("name", txtpsw.getText().toString());
         intent.putExtra("email", txtEmail.getText().toString());
-        //intent.putExtra("imgUrl", imgUrl);
-        //intent.putExtra("account", "btn");
+        intent.putExtra("imgUrl", imgUrl);
+        intent.putExtra("account", "btn");
         startActivity(intent);
     }
 

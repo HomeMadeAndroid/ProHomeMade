@@ -9,10 +9,13 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Switch;
 import android.widget.Toast;
 
+import com.example.manel.prohomemade.DAO.CreateArtisant;
 import com.example.manel.prohomemade.DAO.CreateClient;
 import com.example.manel.prohomemade.model.ListPays;
 import com.example.manel.prohomemade.model.Pays;
@@ -35,13 +38,16 @@ public class SignIn extends AppCompatActivity implements
 
     private static final String TAG = MainActivity.class.getSimpleName();
     CreateClient createClient = new CreateClient();
+    CreateArtisant createArtisant = new CreateArtisant();
     EditText txtNom, txtPrenom, txtTel, txtEmail, txtPassword;
     Spinner spinner;
+    Switch aSwitch;
     ArrayList<String> listItems = new ArrayList<>();
     ArrayAdapter<String> adapter;
     ArrayList<String> list = new ArrayList<>();
     String designp;
     private GererClient gererClient;
+    private String ca;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,11 +60,23 @@ public class SignIn extends AppCompatActivity implements
         if (spinner != null) {
             spinner.setOnItemSelectedListener(this);
         }
+        ca = "client";
         txtNom = (EditText) findViewById(R.id.txtnomSignIn);
         txtPrenom = (EditText) findViewById(R.id.txtprenomSignIn);
         txtTel = (EditText) findViewById(R.id.txttelSignin);
         txtEmail = (EditText) findViewById(R.id.txtemailSignIn);
         txtPassword = (EditText) findViewById(R.id.txtpasswordSignin);
+        aSwitch = (Switch) findViewById(R.id.switch1);
+        aSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    ca = "client";
+                } else {
+                    ca = "artisant";
+                }
+            }
+        });
     }
 
     public void LoadDataPays() {
@@ -113,6 +131,7 @@ public class SignIn extends AppCompatActivity implements
             String prenom = txtPrenom.getText().toString();
             String email = txtEmail.getText().toString();
             String stel = txtTel.getText().toString();
+            String coua = aSwitch.getText().toString();
             int tel = 0;
             if (stel.matches("")) {
                 ShowDialog("champ missing", "saisie votre telephone");
@@ -124,12 +143,24 @@ public class SignIn extends AppCompatActivity implements
             if (nom.matches("") || prenom.matches("") || tel == 0 || password.matches("") || email.matches("")) {
                 ShowDialog("Controle de saisie", "remplir tout les champs");
             } else {
-                createClient = new CreateClient();
-                if (createClient.createClient(nom, prenom, email, password, tel, designp)) {
-                    ShowDialogSucces("Client", "Bienvenue! " + nom + " " + prenom + " ^^",
-                            nom, prenom, password, tel);
+                if (ca.matches("client")) {
+                    createClient = new CreateClient();
+                    if (createClient.createClient(nom, prenom, email, password, tel, designp)) {
+                        ShowDialogSucces("Client", "Bienvenue! " + nom + " " + prenom + " ^^",
+                                nom, prenom, password, tel);
+                    } else {
+                        ShowDialog("client", "nooo");
+                    }
+                } else if (ca.matches("artisant")) {
+                    createArtisant = new CreateArtisant();
+                   /* if (createArtisant.createArtisant(nom, prenom, email, password, tel, designp)) {
+                        ShowDialogSucces("Client", "Bienvenue! " + nom + " " + prenom + " ^^",
+                                nom, prenom, password, tel);
+                    } else {
+                        ShowDialog("client", "nooo");
+                    }*/
                 } else {
-                    ShowDialog("client", "nooo");
+                    ShowToast("erreur switch");
                 }
             }
         } catch (Exception e) {
@@ -145,7 +176,7 @@ public class SignIn extends AppCompatActivity implements
         alertDialog.setButton(android.app.AlertDialog.BUTTON_POSITIVE, "OK",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        Intent intent = new Intent(SignIn.this, Connected.class);
+                        Intent intent = new Intent(SignIn.this, ConnectedClient.class);
                         intent.putExtra("email", email);
                         intent.putExtra("name", nom);
                         //intent.putExtra("account", "btn");
@@ -171,7 +202,7 @@ public class SignIn extends AppCompatActivity implements
     }
 
     public void ShowToast(String msg) {
-        Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_LONG);
+        Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_LONG).show();
     }
 
 }

@@ -36,17 +36,6 @@
                     android:contentDescription="@string/image"
                     android:src="@drawable/hml" />
 
-                <!-- <TextView
-                     android:layout_width="wrap_content"
-                     android:layout_height="wrap_content"
-                     android:gravity="center"
-                     android:text="@string/inscrivez_vous_pour"
-                     android:textAlignment="center"
-                     android:textColor="@android:color/black"
-                     android:textSize="15sp"
-                     android:textStyle="bold"
-                     android:singleLine="false"/>-->
-
             </LinearLayout>
 
             <LinearLayout
