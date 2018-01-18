@@ -125,9 +125,12 @@ public class SignIn extends AppCompatActivity implements
                 ShowDialog("Controle de saisie", "remplir tout les champs");
             } else {
                 createClient = new CreateClient();
-                createClient.createClient(nom, prenom, email, password, tel, designp);
-                ShowDialogSucces("Client", "Bienvenue! " + nom + " " + prenom + " ^^",
-                        nom, prenom, password, tel);
+                if (createClient.createClient(nom, prenom, email, password, tel, designp)) {
+                    ShowDialogSucces("Client", "Bienvenue! " + nom + " " + prenom + " ^^",
+                            nom, prenom, password, tel);
+                } else {
+                    ShowDialog("client", "nooo");
+                }
             }
         } catch (Exception e) {
             ShowDialog("wrong cast", e.getMessage());
