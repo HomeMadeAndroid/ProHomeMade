@@ -171,11 +171,11 @@ public class Logactivity extends AppCompatActivity implements View.OnClickListen
 
     public void SignInbtn(View view) {
         String imgUrl = null;
-        Intent intent = new Intent(Logactivity.this, LogInResultat.class);
-        intent.putExtra("email", txtEmail.getText().toString());
+        Intent intent = new Intent(Logactivity.this, Connected.class);
         intent.putExtra("name", txtpsw.getText().toString());
-        intent.putExtra("imgUrl", imgUrl);
-        intent.putExtra("account", "btn");
+        intent.putExtra("email", txtEmail.getText().toString());
+        //intent.putExtra("imgUrl", imgUrl);
+        //intent.putExtra("account", "btn");
         startActivity(intent);
     }
 

@@ -145,10 +145,10 @@ public class SignIn extends AppCompatActivity implements
         alertDialog.setButton(android.app.AlertDialog.BUTTON_POSITIVE, "OK",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        Intent intent = new Intent(SignIn.this, LogInResultat.class);
-                        intent.putExtra("email", email + " password: " + password);
-                        intent.putExtra("name", nom + " tel: " + tel);
-                        intent.putExtra("account", "btn");
+                        Intent intent = new Intent(SignIn.this, Connected.class);
+                        intent.putExtra("email", email);
+                        intent.putExtra("name", nom);
+                        //intent.putExtra("account", "btn");
                         startActivity(intent);
                         dialog.dismiss();
                     }

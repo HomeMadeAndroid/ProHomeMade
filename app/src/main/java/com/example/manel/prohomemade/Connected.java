@@ -1,5 +1,6 @@
 package com.example.manel.prohomemade;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -9,13 +10,17 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
+import android.widget.Toast;
 
 public class Connected extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    TextView txtName, txtEmail;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,7 +44,39 @@ public class Connected extends AppCompatActivity
         toggle.syncState();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        View headerView = navigationView.getHeaderView(0);
+        txtName = (TextView) headerView.findViewById(R.id.txtclientname);
+        txtEmail = (TextView) headerView.findViewById(R.id.txtclientmail);
         navigationView.setNavigationItemSelectedListener(this);
+        Intent intent = getIntent();
+        Bundle b = intent.getExtras();
+        if (b != null) {
+            String name = (String) b.get("name");
+            String email = (String) b.get("email");
+            Log.d("nameclient", name);
+            Log.d("emailclient", email);
+            txtName.setText(name.toString());
+            txtEmail.setText(email);
+            //account = (String) b.get("account");
+            // btnVisivility(account);
+            /*if (b.get("imgUrl") != null) {
+                String imgUrl = (String) b.get("imgUrl");
+                Glide.with(this).load(imgUrl).into(profilePic);
+            } else {
+                Glide.with(this).load(R.drawable.profilpic).into(profilePic);
+            }*/
+
+            Toast.makeText(getApplicationContext(), email, Toast.LENGTH_LONG);
+
+        }
+
+        /*
+
+View headerView = navigationView.getHeaderView(0);
+navUsername = (TextView) headerView.findViewById(R.id.navUsername);
+navUsernam.setText("Your Text Here");
+
+         */
     }
 
     @Override
