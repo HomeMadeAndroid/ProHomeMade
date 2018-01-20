@@ -20,8 +20,8 @@ import com.example.manel.prohomemade.DAO.CreateArtisant;
 import com.example.manel.prohomemade.DAO.CreateClient;
 import com.example.manel.prohomemade.model.ListPays;
 import com.example.manel.prohomemade.model.Pays;
+import com.example.manel.prohomemade.model.ToastDialog;
 import com.example.manel.prohomemade.service.APIService;
-import com.example.manel.prohomemade.service.GererClient;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -34,42 +34,41 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class SignIn extends AppCompatActivity implements
+public class SignInFG extends AppCompatActivity implements
         AdapterView.OnItemSelectedListener {
 
-    private static final String TAG = MainActivity.class.getSimpleName();
+    EditText txtTel, txtPassword, txtmatfisc;
     CreateClient createClient = new CreateClient();
     CreateArtisant createArtisant = new CreateArtisant();
-    EditText txtNom, txtPrenom, txtTel, txtEmail, txtPassword, txtmatfisc;
-    Spinner spinner;
-    Switch aSwitch;
-    ArrayList<String> listItems = new ArrayList<>();
-    ArrayAdapter<String> adapter;
-    ArrayList<String> list = new ArrayList<>();
     String designp;
+    Spinner spinner;
+    ArrayAdapter<String> adapter;
+    ArrayList<String> listItems = new ArrayList<>();
+    ArrayList<String> list = new ArrayList<>();
+    Switch aSwitch;
     TextInputLayout txTextInputLayout;
-    private GererClient gererClient;
+    ToastDialog toastDialog;
+    String name, prename, email;
     private String ca;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sign_in);
+        setContentView(R.layout.activity_sign_in_fg);
 
-        spinner = (Spinner) findViewById(R.id.spinnerpays);
+        toastDialog = new ToastDialog(getApplicationContext());
+        txTextInputLayout = (TextInputLayout) findViewById(R.id.txtinputlayoutmatfiscFG);
+        txtTel = (EditText) findViewById(R.id.txttelSigninFG);
+        txtPassword = (EditText) findViewById(R.id.txtpasswordSigninFG);
+        txtmatfisc = (EditText) findViewById(R.id.txtmatfisclSigninFG);
+        spinner = (Spinner) findViewById(R.id.spinnerpaysFG);
         adapter = new ArrayAdapter<String>(this, R.layout.spinner_layout, R.id.txtSpinnerD, listItems);
         LoadDataPays();
         if (spinner != null) {
             spinner.setOnItemSelectedListener(this);
         }
         ca = "client";
-        txTextInputLayout = (TextInputLayout) findViewById(R.id.txtinputlayoutmatfisc);
-        txtNom = (EditText) findViewById(R.id.txtnomSignIn);
-        txtPrenom = (EditText) findViewById(R.id.txtprenomSignIn);
-        txtTel = (EditText) findViewById(R.id.txttelSignin);
-        txtEmail = (EditText) findViewById(R.id.txtemailSignIn);
-        txtPassword = (EditText) findViewById(R.id.txtpasswordSignin);
-        txtmatfisc = (EditText) findViewById(R.id.txtmatfisclSignin);
+
         aSwitch = (Switch) findViewById(R.id.switch1);
         aSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -83,6 +82,30 @@ public class SignIn extends AppCompatActivity implements
                 }
             }
         });
+
+
+        Intent intent = getIntent();
+        Bundle b = intent.getExtras();
+        if (b != null) {
+            name = (String) b.get("nom");
+            prename = (String) b.get("prenom");
+            //int tel = b.getInt("tel");
+            email = (String) b.get("email");
+            //String password = (String) b.get("password");
+            Log.d("nameclient", name);
+            Log.d("prenomclient", prename);
+            Log.d("emailclient", email);
+            //txtName.setText(name.toString());
+            //txtEmail.setText(email);
+            //account = (String) b.get("account");
+            // btnVisivility(account);
+            if (b.get("imgUrl") != null) {
+                String imgUrl = (String) b.get("imgUrl");
+                // Glide.with(this).load(imgUrl).into(profilePic);
+            } else {
+                // Glide.with(this).load(R.drawable.homemade101).into(profilePic);
+            }
+        }
     }
 
     public void LoadDataPays() {
@@ -131,63 +154,58 @@ public class SignIn extends AppCompatActivity implements
         Toast.makeText(getApplicationContext(), "Selecte un pays", Toast.LENGTH_LONG).show();
     }
 
-    public void SignIn(View view) {
-        try {
-            String nom = txtNom.getText().toString();
-            String prenom = txtPrenom.getText().toString();
-            String email = txtEmail.getText().toString();
-            String stel = txtTel.getText().toString();
-            String coua = aSwitch.getText().toString();
-            int tel = 0;
-            if (stel.matches("")) {
-                ShowDialog("champ missing", "saisie votre telephone");
-            } else {
-                tel = Integer.parseInt(stel);
-            }
-            String password = txtPassword.getText().toString();
+    public void SignInV(View view) {
+        String stel = txtTel.getText().toString();
+        String pasw = txtPassword.getText().toString();
+        int tel = 0;
+        if (stel.matches("")) {
+            toastDialog.ShowToast("Remplir tout les champs");
+        } else {
+            tel = Integer.parseInt(stel);
 
-            if (nom.matches("") || prenom.matches("") || tel == 0 || password.matches("") || email.matches("")) {
-                ShowDialog("Controle de saisie", "remplir tout les champs");
+            if (pasw.matches("")) {
+                toastDialog.ShowToast("Remplir tout les champs");
             } else {
                 if (ca.matches("client")) {
                     createClient = new CreateClient();
-                    if (createClient.createClient(nom, prenom, email, password, tel, designp)) {
-                        ShowDialogSucces("Client", "Bienvenue! " + nom + " " + prenom + " ^^",
-                                nom, prenom, tel, email, password);
+                    if (createClient.createClient(name, prename, email, pasw, tel, designp)) {
+                        ShowDialogSuccesC("Client", "Bienvenue! " + name + " " + prename + " ^^",
+                                name, prename, tel, email, pasw);
                     } else {
-                        ShowDialog("client", "nooo");
+                        toastDialog.ShowDialog("client", "nooot registre");
                     }
                 } else if (ca.matches("artisant")) {
+                    // artisant
                     String matfisc = txtmatfisc.getText().toString();
                     if (matfisc.matches("")) {
-                        ShowDialog("Controle de saisie", "remplir tout les champs");
+                        toastDialog.ShowDialog("Controle de saisie", "remplir tout les champs");
                     } else {
                         createArtisant = new CreateArtisant();
-                        if (createArtisant.createArtisant(nom, prenom, email, tel, password, designp, txtmatfisc.getText().toString())) {
-                            ShowDialogSuccesA("Artisant", "Bienvenue! " + nom + " " + prenom + " ^^",
-                                    nom, prenom, tel, email, password, matfisc, designp);
+                        if (createArtisant.createArtisant(name, prename, email, tel, pasw, designp, txtmatfisc.getText().toString())) {
+                            ShowDialogSuccesA("Artisant", "Bienvenue! " + name + " " + prename + " ^^",
+                                    name, prename, tel, email, pasw, matfisc, designp);
                         } else {
-                            ShowDialog("Artisant", "nooo");
+                            toastDialog.ShowDialog("Artisant", "nooo");
                         }
                     }
                 } else {
-                    ShowToast("erreur switch");
+                    toastDialog.ShowToast("erreur switch");
                 }
             }
-        } catch (Exception e) {
-            ShowDialog("wrong cast", e.getMessage());
+
         }
+
     }
 
-    private void ShowDialogSucces(String titre, String msg,
-                                  final String nom, final String prenom, final int tel, final String email, final String password) {
+    private void ShowDialogSuccesC(String titre, String msg,
+                                   final String nom, final String prenom, final int tel, final String email, final String password) {
         AlertDialog alertDialog = new AlertDialog.Builder(this).create();
         alertDialog.setTitle(titre);
         alertDialog.setMessage(msg);
         alertDialog.setButton(android.app.AlertDialog.BUTTON_POSITIVE, "OK",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        Intent intent = new Intent(SignIn.this, ConnectedClient.class);
+                        Intent intent = new Intent(getApplicationContext(), ConnectedClient.class);
                         intent.putExtra("nom", nom);
                         intent.putExtra("prenom", prenom);
                         intent.putExtra("tel", tel);
@@ -202,8 +220,8 @@ public class SignIn extends AppCompatActivity implements
     }
 
     private void ShowDialogSuccesA(String titre, String msg,
-                                   final String nom, final String prenom, final int tel,
-                                   final String email, final String password, final String matfisc, final String adr) {
+                                   final String nom, final String prenom, final int tel, final String email,
+                                   final String password, final String matfisc, final String adr) {
         AlertDialog alertDialog = new AlertDialog.Builder(this).create();
         alertDialog.setTitle(titre);
         alertDialog.setMessage(msg);
@@ -225,23 +243,4 @@ public class SignIn extends AppCompatActivity implements
                 });
         alertDialog.show();
     }
-
-    public void ShowDialog(String titre, String msg) {
-        AlertDialog alertDialog = new AlertDialog.Builder(this).create();
-        alertDialog.setTitle(titre);
-        alertDialog.setMessage(msg);
-        alertDialog.setButton(android.app.AlertDialog.BUTTON_POSITIVE, "OK",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-
-                        dialog.dismiss();
-                    }
-                });
-        alertDialog.show();
-    }
-
-    public void ShowToast(String msg) {
-        Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_LONG).show();
-    }
-
 }

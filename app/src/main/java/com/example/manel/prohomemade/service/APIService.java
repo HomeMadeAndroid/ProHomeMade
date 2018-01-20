@@ -35,6 +35,14 @@ public interface APIService {
                              @Field("password") String password);
 
     @FormUrlEncoded
+    @POST("CkeckArtisantFG.php")
+    Call<Artisant> CheckArtisantFG(@Field("email") String email);
+
+    @FormUrlEncoded
+    @POST("CkeckClientFG.php")
+    Call<Client> CheckClientFG(@Field("email") String email);
+
+    @FormUrlEncoded
     @POST("insertClient.php")
     Call<String> CreateClient(@Field("nom") String nom,
                               @Field("prenom") String prenom,

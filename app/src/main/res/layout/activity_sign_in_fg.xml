@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="5dp"
+    android:background="@color/bgcolor"
+    android:orientation="vertical"
+    tools:context="com.example.manel.prohomemade.SignInFG">
+
+    <ScrollView
+        android:id="@+id/scrol"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_marginTop="5dp"
+                android:contentDescription="@string/image"
+                android:src="@drawable/hml" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <Spinner
+                    android:id="@+id/spinnerpaysFG"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:dropDownSelector="@color/colorPrimary"></Spinner>
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content">
+
+                    <EditText
+                        android:id="@+id/txttelSigninFG"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/prompt_tel"
+                        android:imeActionId="6"
+                        android:imeActionLabel="@string/action_sign_in_short"
+                        android:imeOptions="actionUnspecified"
+                        android:inputType="phone"
+                        android:maxLines="1"
+                        android:singleLine="true" />
+                </android.support.design.widget.TextInputLayout>
+
+            </LinearLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/txtpasswordSigninFG"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/prompt_password"
+                    android:imeActionId="6"
+                    android:imeActionLabel="@string/action_sign_in_short"
+                    android:imeOptions="actionUnspecified"
+                    android:inputType="textPassword"
+                    android:maxLines="1"
+                    android:singleLine="true" />
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/txtinputlayoutmatfiscFG"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="invisible">
+
+                <EditText
+                    android:id="@+id/txtmatfisclSigninFG"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:hint="Matricule - Fiscale"
+                    android:imeActionId="6"
+                    android:imeActionLabel="@string/action_sign_in_short"
+                    android:imeOptions="actionUnspecified"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:singleLine="true" />
+            </android.support.design.widget.TextInputLayout>
+
+            <Switch
+                android:id="@+id/switch1"
+                android:layout_width="wrap_content"
+                android:layout_height="10dp"
+                android:layout_marginBottom="5dp"
+                android:checked="true"
+                android:textOff="Artisant"
+                android:textOn="Client" />
+
+            <Button
+                android:id="@+id/email_sign_in_button"
+                style="?android:textAppearanceSmall"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/buttonheight"
+                android:layout_margin="10dp"
+                android:background="@color/btncolor"
+                android:onClick="SignInV"
+                android:text="@string/action_sign_in"
+                android:textStyle="bold"
+                tools:drawableLeft="@android:drawable/ic_secure" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

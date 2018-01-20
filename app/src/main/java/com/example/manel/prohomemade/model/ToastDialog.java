@@ -16,6 +16,11 @@ import com.example.manel.prohomemade.ConnectedClient;
 public class ToastDialog {
     Context context;
 
+    public ToastDialog(Context context) {
+        this.context = context;
+    }
+
+
     private void ShowDialogSucces(String titre, String msg,
                                   final String nom, final String email, final String password, final int tel) {
         AlertDialog alertDialog = new AlertDialog.Builder(context).create();
@@ -99,4 +104,6 @@ public class ToastDialog {
                 });
         alertDialog.show();
     }
+
+
 }

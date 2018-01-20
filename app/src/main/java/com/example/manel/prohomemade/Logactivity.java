@@ -88,13 +88,15 @@ public class Logactivity extends AppCompatActivity implements View.OnClickListen
                                 Log.v("Main", response.toString());
                                 try {
                                     Profile profile = Profile.getCurrentProfile();
-                                    Intent intent = new Intent(Logactivity.this, ConnectedClient.class);
-                                    intent.putExtra("name", profile.getName());
+                                    //Intent intent = new Intent(Logactivity.this, ConnectedClient.class);
+                                    //intent.putExtra("name", profile.getName());
+                                    //intent.putExtra("email", response.getJSONObject().getString("email"));
+                                    //intent.putExtra("imgUrl", profile.getProfilePictureUri(100, 100).toString());
 
-                                    intent.putExtra("email", response.getJSONObject().getString("email"));
-                                    intent.putExtra("imgUrl", profile.getProfilePictureUri(100, 100).toString());
-                                    intent.putExtra("account", "Facebook");
-                                    startActivity(intent);
+                                    chekExistanceFG(response.getJSONObject().getString("email"), profile.getFirstName(), profile.getLastName());
+
+                                    //intent.putExtra("account", "Facebook");
+                                    //startActivity(intent);
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                 }
@@ -130,21 +132,24 @@ public class Logactivity extends AppCompatActivity implements View.OnClickListen
 
     }
 
+    //***************************** Google
     private void handleResult(GoogleSignInResult result) {
         if (result.isSuccess()) {
             GoogleSignInAccount account = result.getSignInAccount();
-            String name = account.getDisplayName();
+            String name = account.getGivenName();
+            String prename = account.getFamilyName();
             String email = account.getEmail();
             String imgUrl = null;
             if (account.getPhotoUrl() != null) {
                 imgUrl = account.getPhotoUrl().toString();
             }
-            Intent intent = new Intent(Logactivity.this, ConnectedClient.class);
+            chekExistanceFG(email, name, prename);
+            /*Intent intent = new Intent(Logactivity.this, ConnectedClient.class);
             intent.putExtra("name", name);
             intent.putExtra("email", email);
             intent.putExtra("imgUrl", imgUrl);
             intent.putExtra("account", "Google");
-            startActivity(intent);
+            startActivity(intent);*/
         } else {
             Log.d("GoogleSignIn ", " Resultat");
         }
@@ -174,8 +179,10 @@ public class Logactivity extends AppCompatActivity implements View.OnClickListen
     public void SignInbtn(View view) {
         final String email = txtEmail.getText().toString();
         final String psw = txtpsw.getText().toString();
+        chekExistance(email, psw);
+    }
 
-        //******************************************************
+    public void chekExistance(final String email, final String psw) {
         Gson gson = new GsonBuilder()
                 .setLenient()
                 .create();
@@ -324,5 +331,87 @@ public class Logactivity extends AppCompatActivity implements View.OnClickListen
                     }
                 });
         alertDialog.show();
+    }
+
+    public void ShowDialogEFG(String titre, String msg, final String email, final String nom, final String prenom) {
+        AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+        alertDialog.setTitle(titre);
+        alertDialog.setMessage(msg);
+        alertDialog.setButton(android.app.AlertDialog.BUTTON_POSITIVE, "OK",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent intent = new Intent(getApplicationContext(), SignInFG.class);
+                        intent.putExtra("nom", nom);
+                        intent.putExtra("prenom", prenom);
+                        intent.putExtra("email", email);
+                        startActivity(intent);
+                        dialog.dismiss();
+                    }
+                });
+        alertDialog.setButton(android.app.AlertDialog.BUTTON_NEGATIVE, "CANCEL",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+        alertDialog.show();
+    }
+
+
+    public void chekExistanceFG(final String email, final String nom, final String prenom) {
+        Gson gson = new GsonBuilder()
+                .setLenient()
+                .create();
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(APIService.dbURL)
+                .addConverterFactory(GsonConverterFactory.create(gson))
+                .build();
+        final APIService api = retrofit.create(APIService.class);
+        Call<Client> call = api.CheckClientFG(email);
+        call.enqueue(new Callback<Client>() {
+            @Override
+            public void onResponse(Call<Client> call, Response<Client> response) {
+                Client clt = response.body();
+                Log.d("valide Request", clt.toString());
+                if (response.isSuccessful()) {
+                    Log.d("Clienttt found", "valide Request");
+                    Log.d("Clienttt found", clt.getNom());
+                    ShowDialogSuccesC("Bienvebue :)", clt.getNom() + " " + clt.getPrenom(),
+                            clt.getNom(), clt.getPrenom(), clt.getTel(), clt.getEmail(), clt.getPassword());
+                } else {
+                    Log.d("Clienttt not found", "invalide Request");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Client> call, Throwable t) {
+                //ShowDialogE(":( u r not regigstred"," do u want to sign in??");
+                Log.d("search client failed", "invalide Request " + t.getMessage());
+                Call<Artisant> call2 = api.CheckArtisantFG(email);
+                call2.enqueue(new Callback<Artisant>() {
+                    @Override
+                    public void onResponse(Call<Artisant> call, Response<Artisant> response) {
+                        Artisant art = response.body();
+                        Log.d("valide Request", art.toString());
+                        if (response.isSuccessful()) {
+                            Log.d("Artisantttt found", "valide Request");
+                            Log.d("Artisant found", art.getNom());
+                            ShowDialogSuccesA("Bienvebue :)", art.getNom() + " " + art.getPrenom(),
+                                    art.getNom(), art.getPrenom(), art.getTel(), art.getEmail(), art.getPassword(),
+                                    art.getMatfisc(), art.getAdr());
+                        } else {
+                            Log.d("Artisanttt not found", "invalide Request");
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<Artisant> call, Throwable t) {
+                        ShowDialogEFG(":( u r not registred with us", " do u want to sign in??", email, nom, prenom);
+                        Log.d("search Artisant failed", "invalide Request " + t.getMessage());
+
+                    }
+                });
+            }
+        });
     }
 }
