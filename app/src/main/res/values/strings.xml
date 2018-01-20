@@ -44,5 +44,6 @@
     </string-array>
     <string name="title_activity_connected">Bienvenue :)</string>
     <string name="spinner_item">spinner item</string>
+    <string name="title_activity_connected_artisant">ConnectedArtisant</string>
 
 </resources>

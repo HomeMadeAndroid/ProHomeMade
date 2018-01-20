@@ -17,8 +17,15 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 
 public class CreateClient {
-    private boolean b = true;
+    private boolean b;
 
+    public boolean isB() {
+        return b;
+    }
+
+    public void setB(boolean b) {
+        this.b = b;
+    }
     public boolean createClient(String nom, String prenom, String email, String password, int tel, String dPay) {
 
         Gson gson = new GsonBuilder()
@@ -31,31 +38,27 @@ public class CreateClient {
         APIService api = retrofit.create(APIService.class);
         Call<String> call = api.CreateClient(nom, prenom, email, tel, password, dPay);
         call.enqueue(new Callback<String>() {
+            String kjj = "";
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
-                if (response.isSuccessful()) {
+                String ress = response.body();
+                if (ress.matches("succe")) {
                     setB(true);
                     Log.d("create client succe", "valide Request");
+                } else {
+                    setB(false);
+                    Log.d("failedsucce", "invalide Request");
                 }
-                setB(true);
             }
 
             @Override
             public void onFailure(Call<String> call, Throwable t) {
-                setB(false);
+                setB(true);
                 Log.d("create client failed", "invalide Request " + t.getMessage());
             }
         });
 
-        Log.d("ajouter client", String.valueOf(isB()));
+        Log.d("ajouter client bbbbbb", String.valueOf(isB()));
         return isB();
-    }
-
-    public boolean isB() {
-        return b;
-    }
-
-    public void setB(boolean b) {
-        this.b = b;
     }
 }

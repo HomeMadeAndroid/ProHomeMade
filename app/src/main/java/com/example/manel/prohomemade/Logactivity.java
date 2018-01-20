@@ -1,8 +1,10 @@
 package com.example.manel.prohomemade;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -10,6 +12,9 @@ import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.manel.prohomemade.model.Artisant;
+import com.example.manel.prohomemade.model.Client;
+import com.example.manel.prohomemade.service.APIService;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
@@ -26,9 +31,17 @@ import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Logactivity extends AppCompatActivity implements View.OnClickListener, GoogleApiClient.OnConnectionFailedListener, GraphRequest.GraphJSONObjectCallback {
 
@@ -159,18 +172,157 @@ public class Logactivity extends AppCompatActivity implements View.OnClickListen
     }
 
     public void SignInbtn(View view) {
-        String imgUrl = null;
-        Intent intent = new Intent(Logactivity.this, ConnectedClient.class);
-        intent.putExtra("name", txtpsw.getText().toString());
-        intent.putExtra("email", txtEmail.getText().toString());
-        intent.putExtra("imgUrl", imgUrl);
-        intent.putExtra("account", "btn");
-        startActivity(intent);
-    }
+        final String email = txtEmail.getText().toString();
+        final String psw = txtpsw.getText().toString();
 
+        //******************************************************
+        Gson gson = new GsonBuilder()
+                .setLenient()
+                .create();
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(APIService.dbURL)
+                .addConverterFactory(GsonConverterFactory.create(gson))
+                .build();
+        final APIService api = retrofit.create(APIService.class);
+        Call<Client> call = api.CheckClient(email, psw);
+        call.enqueue(new Callback<Client>() {
+            @Override
+            public void onResponse(Call<Client> call, Response<Client> response) {
+                Client clt = response.body();
+                Log.d("valide Request", clt.toString());
+                if (response.isSuccessful()) {
+                    Log.d("Clienttt found", "valide Request");
+                    Log.d("Clienttt found", clt.getNom());
+                    ShowDialogSuccesC("Bienvebue :)", clt.getNom() + " " + clt.getPrenom(),
+                            clt.getNom(), clt.getPrenom(), clt.getTel(), clt.getEmail(), clt.getPassword());
+                } else {
+                    Log.d("Clienttt not found", "invalide Request");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Client> call, Throwable t) {
+                //ShowDialogE(":( u r not regigstred"," do u want to sign in??");
+                Log.d("search client failed", "invalide Request " + t.getMessage());
+                Call<Artisant> call2 = api.CheckArtisant(email, psw);
+                call2.enqueue(new Callback<Artisant>() {
+                    @Override
+                    public void onResponse(Call<Artisant> call, Response<Artisant> response) {
+                        Artisant art = response.body();
+                        Log.d("valide Request", art.toString());
+                        if (response.isSuccessful()) {
+                            Log.d("Artisantttt found", "valide Request");
+                            Log.d("Artisant found", art.getNom());
+                            ShowDialogSuccesA("Bienvebue :)", art.getNom() + " " + art.getPrenom(),
+                                    art.getNom(), art.getPrenom(), art.getTel(), art.getEmail(), art.getPassword(),
+                                    art.getMatfisc(), art.getAdr());
+                        } else {
+                            Log.d("Artisanttt not found", "invalide Request");
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<Artisant> call, Throwable t) {
+                        ShowDialogE(":( u r not regigstred", " do u want to sign in??");
+                        Log.d("search Artisant failed", "invalide Request " + t.getMessage());
+
+                    }
+                });
+            }
+        });
+    }
 
     @Override
     public void onCompleted(JSONObject object, GraphResponse response) {
         Log.e("jsdata", object.toString());
+    }
+
+
+    //**********************************
+
+    public void ShowDialog(String titre, String msg) {
+        AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+        alertDialog.setTitle(titre);
+        alertDialog.setMessage(msg);
+        alertDialog.setButton(android.app.AlertDialog.BUTTON_POSITIVE, "OK",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        dialog.dismiss();
+                    }
+                });
+        alertDialog.show();
+    }
+
+    public void ShowToast(String msg) {
+        Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_LONG).show();
+    }
+
+    private void ShowDialogSuccesA(String titre, String msg,
+                                   final String nom, final String prenom, final int tel, final String email,
+                                   final String password, final String matfisc, final String adr) {
+        AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+        alertDialog.setTitle(titre);
+        alertDialog.setMessage(msg);
+        alertDialog.setButton(android.app.AlertDialog.BUTTON_POSITIVE, "OK",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent intent = new Intent(getApplicationContext(), ConnectedArtisant.class);
+                        intent.putExtra("nom", nom);
+                        intent.putExtra("prenom", prenom);
+                        intent.putExtra("tel", tel);
+                        intent.putExtra("email", email);
+                        intent.putExtra("password", password);
+                        intent.putExtra("matfisc", matfisc);
+                        intent.putExtra("adr", adr);
+                        //intent.putExtra("account", "btn");
+                        startActivity(intent);
+                        dialog.dismiss();
+                    }
+                });
+        alertDialog.show();
+    }
+
+    private void ShowDialogSuccesC(String titre, String msg,
+                                   final String nom, final String prenom, final int tel, final String email, final String password) {
+        AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+        alertDialog.setTitle(titre);
+        alertDialog.setMessage(msg);
+        alertDialog.setButton(android.app.AlertDialog.BUTTON_POSITIVE, "OK",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent intent = new Intent(getApplicationContext(), ConnectedClient.class);
+                        intent.putExtra("nom", nom);
+                        intent.putExtra("prenom", prenom);
+                        intent.putExtra("tel", tel);
+                        intent.putExtra("email", email);
+                        intent.putExtra("password", password);
+                        //intent.putExtra("account", "btn");
+                        startActivity(intent);
+                        dialog.dismiss();
+                    }
+                });
+        alertDialog.show();
+    }
+
+    public void ShowDialogE(String titre, String msg) {
+        AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+        alertDialog.setTitle(titre);
+        alertDialog.setMessage(msg);
+        alertDialog.setButton(android.app.AlertDialog.BUTTON_POSITIVE, "OK",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent intent = new Intent(getApplicationContext(), SignIn.class);
+                        startActivity(intent);
+                        dialog.dismiss();
+                    }
+                });
+        alertDialog.setButton(android.app.AlertDialog.BUTTON_NEGATIVE, "CANCEL",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+        alertDialog.show();
     }
 }

@@ -19,15 +19,16 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
-public class ConnectedClient extends AppCompatActivity
+public class ConnectedArtisant extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     TextView txtName, txtEmail;
     private ImageView profilePic;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_connectedclient);
+        setContentView(R.layout.activity_connected_artisant);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -47,9 +48,10 @@ public class ConnectedClient extends AppCompatActivity
         toggle.syncState();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
         View headerView = navigationView.getHeaderView(0);
-        txtName = (TextView) headerView.findViewById(R.id.txtclientname);
-        txtEmail = (TextView) headerView.findViewById(R.id.txtclientmail);
+        txtName = (TextView) headerView.findViewById(R.id.txtartisantname);
+        txtEmail = (TextView) headerView.findViewById(R.id.txtartisantmail);
         profilePic = (ImageView) headerView.findViewById(R.id.profilpic);
         navigationView.setNavigationItemSelectedListener(this);
         Intent intent = getIntent();
@@ -60,11 +62,15 @@ public class ConnectedClient extends AppCompatActivity
             int tel = b.getInt("tel");
             String email = (String) b.get("email");
             String password = (String) b.get("password");
-            Log.d("nameclient", name);
-            Log.d("prenomclient", prename);
-            Log.d("emailclient", email);
-            Log.d("telclient", String.valueOf(tel));
-            Log.d("pswclient", password);
+            String matfisc = (String) b.get("matfisc");
+            String adr = (String) b.get("adr");
+            Log.d("nameartisant", name);
+            Log.d("prenomartisant", prename);
+            Log.d("emailartisant", email);
+            Log.d("telartisant", String.valueOf(tel));
+            Log.d("pswartisant", password);
+            Log.d("matfiscartisant", matfisc);
+            Log.d("adrrtisant", adr);
             txtName.setText(name.toString());
             txtEmail.setText(email);
             //account = (String) b.get("account");
@@ -91,7 +97,7 @@ public class ConnectedClient extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.connectedclient, menu);
+        getMenuInflater().inflate(R.menu.connected_artisant, menu);
         return true;
     }
 

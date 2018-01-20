@@ -12,10 +12,5 @@ public interface IGererClient {
                                 String password,
                                 String dPay);
 
-    public boolean CreateTR(String nom,
-                            String prenom,
-                            String email,
-                            int tel,
-                            String password,
-                            String dPay);
+    public boolean Checkclient(String email, String password);
 }

@@ -3,6 +3,7 @@ package com.example.manel.prohomemade;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -39,13 +40,14 @@ public class SignIn extends AppCompatActivity implements
     private static final String TAG = MainActivity.class.getSimpleName();
     CreateClient createClient = new CreateClient();
     CreateArtisant createArtisant = new CreateArtisant();
-    EditText txtNom, txtPrenom, txtTel, txtEmail, txtPassword;
+    EditText txtNom, txtPrenom, txtTel, txtEmail, txtPassword, txtmatfisc;
     Spinner spinner;
     Switch aSwitch;
     ArrayList<String> listItems = new ArrayList<>();
     ArrayAdapter<String> adapter;
     ArrayList<String> list = new ArrayList<>();
     String designp;
+    TextInputLayout txTextInputLayout;
     private GererClient gererClient;
     private String ca;
 
@@ -61,19 +63,23 @@ public class SignIn extends AppCompatActivity implements
             spinner.setOnItemSelectedListener(this);
         }
         ca = "client";
+        txTextInputLayout = (TextInputLayout) findViewById(R.id.txtinputlayoutmatfisc);
         txtNom = (EditText) findViewById(R.id.txtnomSignIn);
         txtPrenom = (EditText) findViewById(R.id.txtprenomSignIn);
         txtTel = (EditText) findViewById(R.id.txttelSignin);
         txtEmail = (EditText) findViewById(R.id.txtemailSignIn);
         txtPassword = (EditText) findViewById(R.id.txtpasswordSignin);
+        txtmatfisc = (EditText) findViewById(R.id.txtmatfisclSignin);
         aSwitch = (Switch) findViewById(R.id.switch1);
         aSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
                     ca = "client";
+                    txTextInputLayout.setVisibility(View.INVISIBLE);
                 } else {
                     ca = "artisant";
+                    txTextInputLayout.setVisibility(View.VISIBLE);
                 }
             }
         });
@@ -152,13 +158,18 @@ public class SignIn extends AppCompatActivity implements
                         ShowDialog("client", "nooo");
                     }
                 } else if (ca.matches("artisant")) {
-                    createArtisant = new CreateArtisant();
-                   /* if (createArtisant.createArtisant(nom, prenom, email, password, tel, designp)) {
-                        ShowDialogSucces("Client", "Bienvenue! " + nom + " " + prenom + " ^^",
-                                nom, prenom, password, tel);
+                    String matfisc = txtmatfisc.getText().toString();
+                    if (matfisc.matches("")) {
+                        ShowDialog("Controle de saisie", "remplir tout les champs");
                     } else {
-                        ShowDialog("client", "nooo");
-                    }*/
+                        createArtisant = new CreateArtisant();
+                        if (createArtisant.createArtisant(nom, prenom, email, tel, password, designp, txtmatfisc.getText().toString())) {
+                            ShowDialogSuccesA("Artisant", "Bienvenue! " + nom + " " + prenom + " ^^",
+                                    nom, prenom, password, tel);
+                        } else {
+                            ShowDialog("client", "nooo");
+                        }
+                    }
                 } else {
                     ShowToast("erreur switch");
                 }
@@ -177,6 +188,25 @@ public class SignIn extends AppCompatActivity implements
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         Intent intent = new Intent(SignIn.this, ConnectedClient.class);
+                        intent.putExtra("email", email);
+                        intent.putExtra("name", nom);
+                        //intent.putExtra("account", "btn");
+                        startActivity(intent);
+                        dialog.dismiss();
+                    }
+                });
+        alertDialog.show();
+    }
+
+    private void ShowDialogSuccesA(String titre, String msg,
+                                   final String nom, final String email, final String password, final int tel) {
+        AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+        alertDialog.setTitle(titre);
+        alertDialog.setMessage(msg);
+        alertDialog.setButton(android.app.AlertDialog.BUTTON_POSITIVE, "OK",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent intent = new Intent(SignIn.this, ConnectedArtisant.class);
                         intent.putExtra("email", email);
                         intent.putExtra("name", nom);
                         //intent.putExtra("account", "btn");

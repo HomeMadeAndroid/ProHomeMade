@@ -1,5 +1,7 @@
 package com.example.manel.prohomemade.service;
 
+import com.example.manel.prohomemade.model.Artisant;
+import com.example.manel.prohomemade.model.Client;
 import com.example.manel.prohomemade.model.ListPays;
 
 import retrofit2.Call;
@@ -21,6 +23,16 @@ public interface APIService {
 
     @GET("view.php")
     Call<ListPays> getAllPays();
+
+    @FormUrlEncoded
+    @POST("CkeckArtisant.php")
+    Call<Artisant> CheckArtisant(@Field("email") String email,
+                                 @Field("password") String password);
+
+    @FormUrlEncoded
+    @POST("CkeckClient.php")
+    Call<Client> CheckClient(@Field("email") String email,
+                             @Field("password") String password);
 
     @FormUrlEncoded
     @POST("insertClient.php")

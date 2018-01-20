@@ -40,6 +40,10 @@
         <activity
             android:name=".ConnectedClient"
             android:label="@string/title_activity_connected"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ConnectedArtisant"
+            android:label="@string/title_activity_connected"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

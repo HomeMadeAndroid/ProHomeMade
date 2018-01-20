@@ -34,11 +34,14 @@ public class CreateArtisant {
         call.enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
-                if (response.isSuccessful()) {
+                String ress = response.body();
+                if (ress.matches("succe")) {
                     setB(true);
                     Log.d("create artisant succe", "valide Request");
+                } else {
+                    setB(false);
+                    Log.d("failedsucce", "invalide Request");
                 }
-                setB(true);
             }
 
             @Override
