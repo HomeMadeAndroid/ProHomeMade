@@ -43,7 +43,6 @@ public class CreateArtisant {
                     Log.d("failedsucce", "invalide Request");
                 }
             }
-
             @Override
             public void onFailure(Call<String> call, Throwable t) {
                 setB(false);

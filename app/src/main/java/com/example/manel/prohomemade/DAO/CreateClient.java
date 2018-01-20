@@ -17,7 +17,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 
 public class CreateClient {
-    private boolean b;
+    private boolean b = true;
 
     public boolean isB() {
         return b;
@@ -53,7 +53,7 @@ public class CreateClient {
 
             @Override
             public void onFailure(Call<String> call, Throwable t) {
-                setB(true);
+                setB(false);
                 Log.d("create client failed", "invalide Request " + t.getMessage());
             }
         });

@@ -153,7 +153,7 @@ public class SignIn extends AppCompatActivity implements
                     createClient = new CreateClient();
                     if (createClient.createClient(nom, prenom, email, password, tel, designp)) {
                         ShowDialogSucces("Client", "Bienvenue! " + nom + " " + prenom + " ^^",
-                                nom, prenom, password, tel);
+                                nom, prenom, tel, email, password);
                     } else {
                         ShowDialog("client", "nooo");
                     }
@@ -165,7 +165,7 @@ public class SignIn extends AppCompatActivity implements
                         createArtisant = new CreateArtisant();
                         if (createArtisant.createArtisant(nom, prenom, email, tel, password, designp, txtmatfisc.getText().toString())) {
                             ShowDialogSuccesA("Artisant", "Bienvenue! " + nom + " " + prenom + " ^^",
-                                    nom, prenom, password, tel);
+                                    nom, prenom, tel, email, password, matfisc, designp);
                         } else {
                             ShowDialog("client", "nooo");
                         }
@@ -180,7 +180,7 @@ public class SignIn extends AppCompatActivity implements
     }
 
     private void ShowDialogSucces(String titre, String msg,
-                                  final String nom, final String email, final String password, final int tel) {
+                                  final String nom, final String prenom, final int tel, final String email, final String password) {
         AlertDialog alertDialog = new AlertDialog.Builder(this).create();
         alertDialog.setTitle(titre);
         alertDialog.setMessage(msg);
@@ -188,8 +188,11 @@ public class SignIn extends AppCompatActivity implements
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         Intent intent = new Intent(SignIn.this, ConnectedClient.class);
+                        intent.putExtra("nom", nom);
+                        intent.putExtra("prenom", prenom);
+                        intent.putExtra("tel", tel);
                         intent.putExtra("email", email);
-                        intent.putExtra("name", nom);
+                        intent.putExtra("password", password);
                         //intent.putExtra("account", "btn");
                         startActivity(intent);
                         dialog.dismiss();
@@ -199,16 +202,22 @@ public class SignIn extends AppCompatActivity implements
     }
 
     private void ShowDialogSuccesA(String titre, String msg,
-                                   final String nom, final String email, final String password, final int tel) {
+                                   final String nom, final String prenom, final int tel,
+                                   final String email, final String password, final String matfisc, final String adr) {
         AlertDialog alertDialog = new AlertDialog.Builder(this).create();
         alertDialog.setTitle(titre);
         alertDialog.setMessage(msg);
         alertDialog.setButton(android.app.AlertDialog.BUTTON_POSITIVE, "OK",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        Intent intent = new Intent(SignIn.this, ConnectedArtisant.class);
+                        Intent intent = new Intent(getApplicationContext(), ConnectedArtisant.class);
+                        intent.putExtra("nom", nom);
+                        intent.putExtra("prenom", prenom);
+                        intent.putExtra("tel", tel);
                         intent.putExtra("email", email);
-                        intent.putExtra("name", nom);
+                        intent.putExtra("password", password);
+                        intent.putExtra("matfisc", matfisc);
+                        intent.putExtra("adr", adr);
                         //intent.putExtra("account", "btn");
                         startActivity(intent);
                         dialog.dismiss();
