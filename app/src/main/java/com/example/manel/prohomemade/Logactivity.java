@@ -185,6 +185,7 @@ public class Logactivity extends AppCompatActivity implements View.OnClickListen
         chekExistance(email, psw);
     }
 
+    //****************************** teste existance
     public void chekExistance(final String email, final String psw) {
         Gson gson = new GsonBuilder()
                 .setLenient()

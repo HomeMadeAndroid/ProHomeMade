@@ -29,6 +29,11 @@ public interface APIService {
     Call<ListProduit> getAllProduit();
 
     @FormUrlEncoded
+    @POST("getMyProduct.php")
+    Call<ListProduit> getMyProduct(@Field("email") String email,
+                                   @Field("password") String password);
+
+    @FormUrlEncoded
     @POST("CkeckArtisant.php")
     Call<Artisant> CheckArtisant(@Field("email") String email,
                                  @Field("password") String password);
@@ -81,4 +86,14 @@ public interface APIService {
                                 @Field("tel") int tel,
                                 @Field("emailc") String emailc,
                                 @Field("passwordc") String passwordc);
+
+    @FormUrlEncoded
+    @POST("insertProduit.php")
+    Call<String> Createproduct(@Field("nom") String nom,
+                               @Field("descri") String descri,
+                               @Field("catg") String catg,
+                               @Field("prix") float prix,
+                               @Field("dispo") String dispo,
+                               @Field("nomart") String nomart,
+                               @Field("email") String email);
 }

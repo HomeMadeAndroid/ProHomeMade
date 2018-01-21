@@ -1,15 +1,12 @@
 package com.example.manel.prohomemade;
 
-import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.manel.prohomemade.Adapter.RcvProduit;
@@ -24,26 +21,36 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-/**
- * Created by manel on 21/01/2018.
- */
+public class ListeProduitArt extends AppCompatActivity {
 
-public class FirstPageConnectedClient extends Fragment {
     RecyclerView recyclerView;
-    View myview;
+    String name, prename, matfisc;
+    int tel;
+    String email, password, account;
     private RcvProduit rcvProduit;
 
-    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        myview = inflater.inflate(R.layout.displayproduit, container, false);
-        return myview;
-    }
-
-    @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        recyclerView = (RecyclerView) getView().findViewById(R.id.rcvProduit);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_liste_produit_art);
+        Intent intent = getIntent();
+        Bundle b = intent.getExtras();
+        if (b != null) {
+            name = (String) b.get("nom");
+            prename = (String) b.get("prenom");
+            tel = b.getInt("tel");
+            email = (String) b.get("email");
+            password = (String) b.get("password");
+            matfisc = (String) b.get("matfisc");
+            account = (String) b.get("account");
+            Log.d("nameartisant a modifier", name);
+            Log.d("prmartisant a modifier", prename);
+            Log.d("emlartisant a modifier", email);
+            Log.d("telartisant a modifier", String.valueOf(tel));
+            Log.d("pswartisant a modifier", password);
+            Log.d("matartisant a modifier", matfisc);
+        }
+        recyclerView = (RecyclerView) findViewById(R.id.rcvProduitl);
         LoadDataProduit();
     }
 
@@ -56,27 +63,28 @@ public class FirstPageConnectedClient extends Fragment {
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build();
         APIService api = retrofit.create(APIService.class);
-        Call<ListProduit> call = api.getAllProduit();
+        Call<ListProduit> call = api.getMyProduct(email, password);
         call.enqueue(new Callback<ListProduit>() {
             @Override
             public void onResponse(Call<ListProduit> call, Response<ListProduit> response) {
                 ListProduit listProduct = response.body();
                 if (listProduct.getStatus() == 1) {
                     Log.d("erreur: ", listProduct.getListP().toString());
-                    rcvProduit = new RcvProduit(getActivity(), listProduct.getListP(), "client");
-                    recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+                    rcvProduit = new RcvProduit(getApplicationContext(), listProduct.getListP(), "art");
+                    recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
                     recyclerView.setItemAnimator(new DefaultItemAnimator());
                     recyclerView.setAdapter(rcvProduit);
                 } else {
-                    Toast.makeText(getActivity(), "hjhj " + listProduct.getMsg(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "you don't have products " + listProduct.getMsg(), Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<ListProduit> call, Throwable t) {
-                Toast.makeText(getActivity(), t.getMessage(), Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_LONG).show();
                 Log.d("erreur: ", t.getMessage());
             }
         });
     }
+
 }

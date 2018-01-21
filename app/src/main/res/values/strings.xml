@@ -20,7 +20,7 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
-    <string name="action_settings">Parametre</string>
+    <string name="action_settings">Déconnexion</string>
     <string name="image">Image</string>
     <string name="inscrivez_vous_pour">Inscrivez-vous pour .........</string>
     <string name="navezpascompte">N\'avez pas un compte?</string>
@@ -37,10 +37,11 @@
 
 
     <string-array name="labels_array">
-        <item>Home</item>
-        <item>Work</item>
-        <item>Mobile</item>
-        <item>Other</item>
+        <item>Accessoires</item>
+        <item>Decoration</item>
+        <item>Couture</item>
+        <item>Peinture</item>
+        <item>Autres</item>
     </string-array>
     <string name="title_activity_connected">Bienvenue :)</string>
     <string name="spinner_item">spinner item</string>

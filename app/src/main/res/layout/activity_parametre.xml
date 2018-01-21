@@ -8,6 +8,15 @@
     android:padding="5dp"
     tools:context="com.example.manel.prohomemade.ParametreC">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:fontFamily="@font/andada"
+        android:gravity="center_horizontal"
+        android:padding="15dp"
+        android:text="Voules vous vrement Deconnecte" />
+
     <LinearLayout
         android:id="@+id/googleSection"
         android:layout_width="match_parent"

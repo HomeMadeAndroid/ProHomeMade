@@ -159,9 +159,9 @@ public class ConnectedClient extends AppCompatActivity
             intent.putExtra("password", password);
             intent.putExtra("account", accnt);
             startActivity(intent);
-        } else if (id == R.id.nav_share) {
+            //} else if (id == R.id.nav_share) {
 
-        } else if (id == R.id.nav_send) {
+            //} else if (id == R.id.nav_send) {
 
         }
 

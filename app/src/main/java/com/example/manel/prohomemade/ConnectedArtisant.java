@@ -139,6 +139,15 @@ public class ConnectedArtisant extends AppCompatActivity
         if (id == R.id.nav_camera) {
             // Handle the camera action
             // ajouter produit
+            Intent intent = new Intent(getApplicationContext(), InsertProduct.class);
+            intent.putExtra("nom", name);
+            intent.putExtra("prenom", prename);
+            intent.putExtra("tel", tel);
+            intent.putExtra("email", email);
+            intent.putExtra("password", password);
+            intent.putExtra("matfisc", matfisc);
+            intent.putExtra("account", accnt);
+            startActivity(intent);
         } else if (id == R.id.nav_actualite) {
             // consulter les cmds
         } else if (id == R.id.nav_slideshow) {
@@ -154,10 +163,19 @@ public class ConnectedArtisant extends AppCompatActivity
             intent.putExtra("matfisc", matfisc);
             intent.putExtra("account", accnt);
             startActivity(intent);
-        } else if (id == R.id.nav_share) {
+            //} else if (id == R.id.nav_share) {
 
         } else if (id == R.id.nav_send) {
-
+            //Liste des produits
+            Intent intent = new Intent(getApplicationContext(), ListeProduitArt.class);
+            intent.putExtra("nom", name);
+            intent.putExtra("prenom", prename);
+            intent.putExtra("tel", tel);
+            intent.putExtra("email", email);
+            intent.putExtra("password", password);
+            intent.putExtra("matfisc", matfisc);
+            intent.putExtra("account", accnt);
+            startActivity(intent);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

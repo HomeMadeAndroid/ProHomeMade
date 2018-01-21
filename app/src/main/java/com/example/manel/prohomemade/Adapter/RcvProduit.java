@@ -20,10 +20,12 @@ import java.util.List;
 public class RcvProduit extends RecyclerView.Adapter<RcvProduit.ViewHolder> {
     Context context;
     List<Produit> listP;
+    String cnt;
 
-    public RcvProduit(Context context, List<Produit> listP) {
+    public RcvProduit(Context context, List<Produit> listP, String cnt) {
         this.context = context;
         this.listP = listP;
+        this.cnt = cnt;
     }
 
     @Override
@@ -91,6 +93,13 @@ public class RcvProduit extends RecyclerView.Adapter<RcvProduit.ViewHolder> {
             // details produit
             //Intent intent = new Intent(context, Logactivity.class);
             //context.startActivity(intent);
+            if (cnt.matches("art")) {
+                //Intent intent = new Intent(context, GerProduit.class);
+                //context.startActivity(intent);
+            } else {
+                //Intent intent = new Intent(context, CmdProduit.class);
+                //context.startActivity(intent);
+            }
         }
     }
 }
