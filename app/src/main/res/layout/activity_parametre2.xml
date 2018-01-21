@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="5dp"
+    android:orientation="vertical"
+    android:padding="5dp"
+    tools:context="com.example.manel.prohomemade.ParametreA">
+
+    <LinearLayout
+        android:id="@+id/googleSection"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/btngLogout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/btncolor"
+            android:drawableLeft="@drawable/com_facebook_close"
+            android:gravity="center"
+            android:text="@string/logout"
+            android:textColor="@color/bgcolor" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/facebookSection"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <com.facebook.login.widget.LoginButton
+            android:id="@+id/btnfLogout"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_margin="5dp"
+            android:text="Facebook"
+            android:textStyle="bold"></com.facebook.login.widget.LoginButton>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/btnSection"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/btnLogout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/btncolor"
+            android:drawableLeft="@drawable/com_facebook_close"
+            android:gravity="center"
+            android:text="@string/action_sign_out"
+            android:textColor="@color/bgcolor" />
+        <!--android:drawableLeft="@android:drawable/ic_menu_send"-->
+    </LinearLayout>
+
+
+</LinearLayout>

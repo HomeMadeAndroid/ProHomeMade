@@ -60,4 +60,21 @@ public interface APIService {
                                 @Field("password") String password,
                                 @Field("adr") String adr,
                                 @Field("matfisc") String matfisc);
+
+    @FormUrlEncoded
+    @POST("ModifierArtisant.php")
+    Call<String> ModifierArtisant(@Field("nom") String nom,
+                                  @Field("prenom") String prenom,
+                                  @Field("tel") int tel,
+                                  @Field("matfisc") String matfisc,
+                                  @Field("emailc") String emailc,
+                                  @Field("passwordc") String passwordc);
+
+    @FormUrlEncoded
+    @POST("ModifierClient.php")
+    Call<String> ModifierClient(@Field("nom") String nom,
+                                @Field("prenom") String prenom,
+                                @Field("tel") int tel,
+                                @Field("emailc") String emailc,
+                                @Field("passwordc") String passwordc);
 }

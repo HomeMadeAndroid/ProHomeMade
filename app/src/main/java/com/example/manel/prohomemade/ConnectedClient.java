@@ -23,7 +23,12 @@ public class ConnectedClient extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     TextView txtName, txtEmail;
+    String account, accnt;
+    String name, prename;
+    int tel;
+    String email, password;
     private ImageView profilePic;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,20 +60,27 @@ public class ConnectedClient extends AppCompatActivity
         Intent intent = getIntent();
         Bundle b = intent.getExtras();
         if (b != null) {
-            String name = (String) b.get("nom");
-            String prename = (String) b.get("prenom");
-            int tel = b.getInt("tel");
-            String email = (String) b.get("email");
-            String password = (String) b.get("password");
+            name = (String) b.get("nom");
+            prename = (String) b.get("prenom");
+            tel = b.getInt("tel");
+            email = (String) b.get("email");
+            password = (String) b.get("password");
             Log.d("nameclient", name);
             Log.d("prenomclient", prename);
             Log.d("emailclient", email);
             Log.d("telclient", String.valueOf(tel));
             Log.d("pswclient", password);
-            txtName.setText(name.toString());
+            txtName.setText(name.toString() + " " + prename.toString());
             txtEmail.setText(email);
-            //account = (String) b.get("account");
-            // btnVisivility(account);
+            account = (String) b.get("account");
+            if (account.matches("Google")) {
+                accnt = "google";
+            } else if (account.matches("Facebook")) {
+                accnt = "facebook";
+            } else {
+                accnt = "btn";
+            }
+            //btnVisivility(account);
             if (b.get("imgUrl") != null) {
                 String imgUrl = (String) b.get("imgUrl");
                 Glide.with(this).load(imgUrl).into(profilePic);
@@ -104,7 +116,10 @@ public class ConnectedClient extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            return true;
+            Intent intent = new Intent(getApplicationContext(), ParametreC.class);
+            intent.putExtra("account", accnt);
+            startActivity(intent);
+            //return true;
         }
 
         return super.onOptionsItemSelected(item);
@@ -118,12 +133,21 @@ public class ConnectedClient extends AppCompatActivity
 
         if (id == R.id.nav_camera) {
             // Handle the camera action
+            // panier
         } else if (id == R.id.nav_gallery) {
-
+            // actualitee
         } else if (id == R.id.nav_slideshow) {
-
+            // consulter video
         } else if (id == R.id.nav_manage) {
-
+            // modifier profil
+            Intent intent = new Intent(getApplicationContext(), ModifierC.class);
+            intent.putExtra("nom", name);
+            intent.putExtra("prenom", prename);
+            intent.putExtra("tel", tel);
+            intent.putExtra("email", email);
+            intent.putExtra("password", password);
+            intent.putExtra("account", accnt);
+            startActivity(intent);
         } else if (id == R.id.nav_share) {
 
         } else if (id == R.id.nav_send) {

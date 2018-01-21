@@ -95,7 +95,8 @@ public class Logactivity extends AppCompatActivity implements View.OnClickListen
 
                                     chekExistanceFG(response.getJSONObject().getString("email"),
                                             profile.getFirstName(), profile.getLastName(),
-                                            profile.getProfilePictureUri(73, 73).toString());
+                                            profile.getProfilePictureUri(73, 73).toString(),
+                                            "Facebook");
 
                                     //intent.putExtra("account", "Facebook");
                                     //startActivity(intent);
@@ -145,7 +146,7 @@ public class Logactivity extends AppCompatActivity implements View.OnClickListen
             if (account.getPhotoUrl() != null) {
                 imgUrl = account.getPhotoUrl().toString();
             }
-            chekExistanceFG(email, name, prename, imgUrl);
+            chekExistanceFG(email, name, prename, imgUrl, "Google");
             /*Intent intent = new Intent(Logactivity.this, ConnectedClient.class);
             intent.putExtra("name", name);
             intent.putExtra("email", email);
@@ -203,7 +204,8 @@ public class Logactivity extends AppCompatActivity implements View.OnClickListen
                     Log.d("Clienttt found", "valide Request");
                     Log.d("Clienttt found", clt.getNom());
                     ShowDialogSuccesC("Bienvebue :)", clt.getNom() + " " + clt.getPrenom(),
-                            clt.getNom(), clt.getPrenom(), clt.getTel(), clt.getEmail(), clt.getPassword());
+                            clt.getNom(), clt.getPrenom(), clt.getTel(),
+                            clt.getEmail(), clt.getPassword(), "btn");
                 } else {
                     Log.d("Clienttt not found", "invalide Request");
                 }
@@ -224,7 +226,7 @@ public class Logactivity extends AppCompatActivity implements View.OnClickListen
                             Log.d("Artisant found", art.getNom());
                             ShowDialogSuccesA("Bienvebue :)", art.getNom() + " " + art.getPrenom(),
                                     art.getNom(), art.getPrenom(), art.getTel(), art.getEmail(), art.getPassword(),
-                                    art.getMatfisc(), art.getAdr());
+                                    art.getMatfisc(), art.getAdr(), "btn");
                         } else {
                             Log.d("Artisanttt not found", "invalide Request");
                         }
@@ -269,7 +271,7 @@ public class Logactivity extends AppCompatActivity implements View.OnClickListen
 
     private void ShowDialogSuccesA(String titre, String msg,
                                    final String nom, final String prenom, final int tel, final String email,
-                                   final String password, final String matfisc, final String adr) {
+                                   final String password, final String matfisc, final String adr, final String account) {
         AlertDialog alertDialog = new AlertDialog.Builder(this).create();
         alertDialog.setTitle(titre);
         alertDialog.setMessage(msg);
@@ -284,6 +286,7 @@ public class Logactivity extends AppCompatActivity implements View.OnClickListen
                         intent.putExtra("password", password);
                         intent.putExtra("matfisc", matfisc);
                         intent.putExtra("adr", adr);
+                        intent.putExtra("account", "account");
                         //intent.putExtra("account", "btn");
                         startActivity(intent);
                         dialog.dismiss();
@@ -293,8 +296,10 @@ public class Logactivity extends AppCompatActivity implements View.OnClickListen
     }
 
     private void ShowDialogSuccesAFG(String titre, String msg,
-                                     final String nom, final String prenom, final int tel, final String email,
-                                     final String password, final String matfisc, final String adr, final String imgUrl) {
+                                     final String nom, final String prenom, final int tel,
+                                     final String email, final String password,
+                                     final String matfisc, final String adr,
+                                     final String imgUrl, final String account) {
         AlertDialog alertDialog = new AlertDialog.Builder(this).create();
         alertDialog.setTitle(titre);
         alertDialog.setMessage(msg);
@@ -310,7 +315,7 @@ public class Logactivity extends AppCompatActivity implements View.OnClickListen
                         intent.putExtra("matfisc", matfisc);
                         intent.putExtra("adr", adr);
                         intent.putExtra("imgUrl", imgUrl);
-                        //intent.putExtra("account", "btn");
+                        intent.putExtra("account", account);
                         startActivity(intent);
                         dialog.dismiss();
                     }
@@ -320,7 +325,7 @@ public class Logactivity extends AppCompatActivity implements View.OnClickListen
 
     private void ShowDialogSuccesC(String titre, String msg,
                                    final String nom, final String prenom, final int tel, final String email,
-                                   final String password) {
+                                   final String password, final String account) {
         AlertDialog alertDialog = new AlertDialog.Builder(this).create();
         alertDialog.setTitle(titre);
         alertDialog.setMessage(msg);
@@ -333,6 +338,7 @@ public class Logactivity extends AppCompatActivity implements View.OnClickListen
                         intent.putExtra("tel", tel);
                         intent.putExtra("email", email);
                         intent.putExtra("password", password);
+                        intent.putExtra("account", account);
                         //intent.putExtra("account", "btn");
                         startActivity(intent);
                         dialog.dismiss();
@@ -343,7 +349,7 @@ public class Logactivity extends AppCompatActivity implements View.OnClickListen
 
     private void ShowDialogSuccesCFG(String titre, String msg,
                                      final String nom, final String prenom, final int tel, final String email,
-                                     final String password, final String imgUrl) {
+                                     final String password, final String imgUrl, final String account) {
         AlertDialog alertDialog = new AlertDialog.Builder(this).create();
         alertDialog.setTitle(titre);
         alertDialog.setMessage(msg);
@@ -357,7 +363,7 @@ public class Logactivity extends AppCompatActivity implements View.OnClickListen
                         intent.putExtra("email", email);
                         intent.putExtra("password", password);
                         intent.putExtra("imgUrl", imgUrl);
-                        //intent.putExtra("account", "btn");
+                        intent.putExtra("account", account);
                         startActivity(intent);
                         dialog.dismiss();
                     }
@@ -412,7 +418,11 @@ public class Logactivity extends AppCompatActivity implements View.OnClickListen
     }
 
 
-    public void chekExistanceFG(final String email, final String nom, final String prenom, final String imgUrl) {
+    public void chekExistanceFG(final String email,
+                                final String nom,
+                                final String prenom,
+                                final String imgUrl,
+                                final String account) {
         Gson gson = new GsonBuilder()
                 .setLenient()
                 .create();
@@ -431,7 +441,10 @@ public class Logactivity extends AppCompatActivity implements View.OnClickListen
                     Log.d("Clienttt found", "valide Request");
                     Log.d("Clienttt found", clt.getNom());
                     ShowDialogSuccesCFG("Bienvebue :)", clt.getNom() + " " + clt.getPrenom(),
-                            clt.getNom(), clt.getPrenom(), clt.getTel(), clt.getEmail(), clt.getPassword(), imgUrl);
+                            clt.getNom(), clt.getPrenom(),
+                            clt.getTel(), clt.getEmail(),
+                            clt.getPassword(), imgUrl,
+                            account);
                 } else {
                     Log.d("Clienttt not found", "invalide Request");
                 }
@@ -452,7 +465,7 @@ public class Logactivity extends AppCompatActivity implements View.OnClickListen
                             Log.d("Artisant found", art.getNom());
                             ShowDialogSuccesAFG("Bienvebue :)", art.getNom() + " " + art.getPrenom(),
                                     art.getNom(), art.getPrenom(), art.getTel(), art.getEmail(), art.getPassword(),
-                                    art.getMatfisc(), art.getAdr(), imgUrl);
+                                    art.getMatfisc(), art.getAdr(), imgUrl, account);
                         } else {
                             Log.d("Artisanttt not found", "invalide Request");
                         }

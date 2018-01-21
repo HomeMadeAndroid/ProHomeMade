@@ -12,4 +12,11 @@ public interface IGererArtisant {
                                   String password,
                                   String adr,
                                   String matfisc);
+
+    public boolean ModifierArtisant(String nom,
+                                    String prenom,
+                                    int tel,
+                                    String matfisc,
+                                    String emailm,
+                                    String passwordc);
 }

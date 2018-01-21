@@ -45,7 +45,11 @@
             android:name=".ConnectedArtisant"
             android:label="@string/title_activity_connected"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".SignInFG"></activity>
+        <activity android:name=".SignInFG" />
+        <activity android:name=".ParametreC" />
+        <activity android:name=".ParametreA" />
+        <activity android:name=".ModifierC" />
+        <activity android:name=".ModifierA"></activity>
     </application>
 
 </manifest>

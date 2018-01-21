@@ -13,4 +13,10 @@ public interface IGererClient {
                                 String dPay);
 
     public boolean Checkclient(String email, String password);
+
+    public boolean ModifierClient(String nom,
+                                  String prenom,
+                                  int tel,
+                                  String emailm,
+                                  String passwordc);
 }

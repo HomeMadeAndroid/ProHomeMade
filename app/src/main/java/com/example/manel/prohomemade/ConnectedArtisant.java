@@ -23,6 +23,10 @@ public class ConnectedArtisant extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     TextView txtName, txtEmail;
+    String account, accnt;
+    String name, prename, matfisc;
+    int tel;
+    String email, password;
     private ImageView profilePic;
 
     @Override
@@ -57,23 +61,30 @@ public class ConnectedArtisant extends AppCompatActivity
         Intent intent = getIntent();
         Bundle b = intent.getExtras();
         if (b != null) {
-            String name = (String) b.get("nom");
-            String prename = (String) b.get("prenom");
-            int tel = b.getInt("tel");
-            String email = (String) b.get("email");
-            String password = (String) b.get("password");
-            String matfisc = (String) b.get("matfisc");
-            String adr = (String) b.get("adr");
+            name = (String) b.get("nom");
+            prename = (String) b.get("prenom");
+            tel = b.getInt("tel");
+            email = (String) b.get("email");
+            password = (String) b.get("password");
+            matfisc = (String) b.get("matfisc");
+            //String adr = (String) b.get("adr");
             Log.d("nameartisant", name);
             Log.d("prenomartisant", prename);
             Log.d("emailartisant", email);
             Log.d("telartisant", String.valueOf(tel));
             Log.d("pswartisant", password);
             Log.d("matfiscartisant", matfisc);
-            Log.d("adrrtisant", adr);
-            txtName.setText(name.toString());
+            //Log.d("adrrtisant", adr);
+            txtName.setText(name.toString() + " " + prename.toString());
             txtEmail.setText(email);
-            //account = (String) b.get("account");
+            account = (String) b.get("account");
+            if (account.matches("Google")) {
+                accnt = "google";
+            } else if (account.matches("Facebook")) {
+                accnt = "facebook";
+            } else {
+                accnt = "btn";
+            }
             // btnVisivility(account);
             if (b.get("imgUrl") != null) {
                 String imgUrl = (String) b.get("imgUrl");
@@ -110,7 +121,10 @@ public class ConnectedArtisant extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            return true;
+            Intent intent = new Intent(getApplicationContext(), ParametreC.class);
+            intent.putExtra("account", accnt);
+            startActivity(intent);
+            //return true;
         }
 
         return super.onOptionsItemSelected(item);
@@ -124,12 +138,22 @@ public class ConnectedArtisant extends AppCompatActivity
 
         if (id == R.id.nav_camera) {
             // Handle the camera action
+            // ajouter produit
         } else if (id == R.id.nav_gallery) {
-
+            // consulter les cmds
         } else if (id == R.id.nav_slideshow) {
-
+            // ajouter video
         } else if (id == R.id.nav_manage) {
-
+            // modifier profil
+            Intent intent = new Intent(getApplicationContext(), ModifierA.class);
+            intent.putExtra("nom", name);
+            intent.putExtra("prenom", prename);
+            intent.putExtra("tel", tel);
+            intent.putExtra("email", email);
+            intent.putExtra("password", password);
+            intent.putExtra("matfisc", matfisc);
+            intent.putExtra("account", accnt);
+            startActivity(intent);
         } else if (id == R.id.nav_share) {
 
         } else if (id == R.id.nav_send) {
