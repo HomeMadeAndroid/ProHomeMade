@@ -3,6 +3,7 @@ package com.example.manel.prohomemade.service;
 import com.example.manel.prohomemade.model.Artisant;
 import com.example.manel.prohomemade.model.Client;
 import com.example.manel.prohomemade.model.ListPays;
+import com.example.manel.prohomemade.model.ListProduit;
 
 import retrofit2.Call;
 import retrofit2.http.Field;
@@ -23,6 +24,9 @@ public interface APIService {
 
     @GET("view.php")
     Call<ListPays> getAllPays();
+
+    @GET("ListeProduit.php")
+    Call<ListProduit> getAllProduit();
 
     @FormUrlEncoded
     @POST("CkeckArtisant.php")

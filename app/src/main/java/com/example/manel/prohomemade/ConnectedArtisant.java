@@ -139,7 +139,7 @@ public class ConnectedArtisant extends AppCompatActivity
         if (id == R.id.nav_camera) {
             // Handle the camera action
             // ajouter produit
-        } else if (id == R.id.nav_gallery) {
+        } else if (id == R.id.nav_actualite) {
             // consulter les cmds
         } else if (id == R.id.nav_slideshow) {
             // ajouter video

@@ -9,7 +9,7 @@
             android:icon="@drawable/ic_menu_camera"
             android:title="Ajouter Produit" />
         <item
-            android:id="@+id/nav_gallery"
+            android:id="@+id/nav_actualite"
             android:icon="@drawable/ic_menu_gallery"
             android:title="Consulter les Commandes" />
         <item

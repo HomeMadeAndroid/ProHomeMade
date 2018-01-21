@@ -211,7 +211,7 @@ public class SignInFG extends AppCompatActivity implements
                         intent.putExtra("tel", tel);
                         intent.putExtra("email", email);
                         intent.putExtra("password", password);
-                        //intent.putExtra("account", "btn");
+                        intent.putExtra("account", "btn");
                         startActivity(intent);
                         dialog.dismiss();
                     }
@@ -236,7 +236,7 @@ public class SignInFG extends AppCompatActivity implements
                         intent.putExtra("password", password);
                         intent.putExtra("matfisc", matfisc);
                         intent.putExtra("adr", adr);
-                        //intent.putExtra("account", "btn");
+                        intent.putExtra("account", "btn");
                         startActivity(intent);
                         dialog.dismiss();
                     }

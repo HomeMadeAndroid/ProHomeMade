@@ -1,5 +1,6 @@
 package com.example.manel.prohomemade;
 
+import android.app.FragmentManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -27,6 +28,7 @@ public class ConnectedClient extends AppCompatActivity
     String name, prename;
     int tel;
     String email, password;
+    TextView txtt;
     private ImageView profilePic;
 
     @Override
@@ -35,6 +37,11 @@ public class ConnectedClient extends AppCompatActivity
         setContentView(R.layout.activity_connectedclient);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        FragmentManager fragmentManager = getFragmentManager();
+        fragmentManager.beginTransaction()
+                .replace(R.id.content_frame, new FirstPageConnectedClient())
+                .commit();
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -130,12 +137,16 @@ public class ConnectedClient extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
+        FragmentManager fragmentManager = getFragmentManager();
 
-        if (id == R.id.nav_camera) {
+        if (id == R.id.nav_actualite) {
             // Handle the camera action
-            // panier
-        } else if (id == R.id.nav_gallery) {
             // actualitee
+            fragmentManager.beginTransaction()
+                    .replace(R.id.content_frame, new FirstPageConnectedClient())
+                    .commit();
+        } else if (id == R.id.nav_camera) {
+            // panier
         } else if (id == R.id.nav_slideshow) {
             // consulter video
         } else if (id == R.id.nav_manage) {
