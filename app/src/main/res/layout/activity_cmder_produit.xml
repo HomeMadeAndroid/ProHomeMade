@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="50dp"
+    android:orientation="vertical"
+    tools:context="com.example.manel.prohomemade.CmderProduit">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_marginTop="5dp"
+        android:contentDescription="@string/image"
+        android:src="@drawable/hml" />
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/txtqte"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="Quantie a commande"
+            android:imeActionId="6"
+            android:imeActionLabel="@string/action_sign_in_short"
+            android:imeOptions="actionUnspecified"
+            android:inputType="number"
+            android:maxLines="1"
+            android:singleLine="true" />
+    </android.support.design.widget.TextInputLayout>
+
+    <Button
+        android:id="@+id/email_sign_in_button"
+        style="?android:textAppearanceSmall"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/buttonheight"
+        android:layout_margin="20dp"
+        android:background="@color/btncolor"
+        android:onClick="InsertCmd"
+        android:text="Commander"
+        android:textStyle="bold"
+        tools:drawableLeft="@android:drawable/ic_secure" />
+
+</LinearLayout>

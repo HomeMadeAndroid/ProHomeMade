@@ -3,9 +3,7 @@ package com.example.manel.prohomemade;
 import android.app.FragmentManager;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -43,14 +41,16 @@ public class ConnectedClient extends AppCompatActivity
                 .replace(R.id.content_frame, new FirstPageConnectedClient())
                 .commit();
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        /*FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                //Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                  //      .setAction("Action", null).show();
+                Intent intent = new Intent(getApplicationContext(),CmderProduit.class);
+                startActivity(intent);
             }
-        });
+        });*/
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -147,8 +147,12 @@ public class ConnectedClient extends AppCompatActivity
                     .commit();
         } else if (id == R.id.nav_camera) {
             // panier
+
+
         } else if (id == R.id.nav_slideshow) {
             // consulter video
+
+
         } else if (id == R.id.nav_manage) {
             // modifier profil
             Intent intent = new Intent(getApplicationContext(), ModifierC.class);

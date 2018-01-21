@@ -96,4 +96,11 @@ public interface APIService {
                                @Field("dispo") String dispo,
                                @Field("nomart") String nomart,
                                @Field("email") String email);
+
+    @FormUrlEncoded
+    @POST("insertCmd.php")
+    Call<String> CreateCmd(@Field("email") String email,
+                           @Field("password") String password,
+                           @Field("idProd") int idProd,
+                           @Field("qte") int qte);
 }

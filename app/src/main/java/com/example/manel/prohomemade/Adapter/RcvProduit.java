@@ -1,6 +1,7 @@
 package com.example.manel.prohomemade.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -8,6 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.manel.prohomemade.CmderProduit;
+import com.example.manel.prohomemade.ModSuppProduit;
 import com.example.manel.prohomemade.R;
 import com.example.manel.prohomemade.model.Produit;
 
@@ -94,11 +97,13 @@ public class RcvProduit extends RecyclerView.Adapter<RcvProduit.ViewHolder> {
             //Intent intent = new Intent(context, Logactivity.class);
             //context.startActivity(intent);
             if (cnt.matches("art")) {
-                //Intent intent = new Intent(context, GerProduit.class);
-                //context.startActivity(intent);
+                Intent intent = new Intent(context, ModSuppProduit.class);
+                intent.putExtra("idProd", txtid.getText().toString());
+                context.startActivity(intent);
             } else {
-                //Intent intent = new Intent(context, CmdProduit.class);
-                //context.startActivity(intent);
+                Intent intent = new Intent(context, CmderProduit.class);
+                intent.putExtra("idProd", txtid.getText().toString());
+                context.startActivity(intent);
             }
         }
     }

@@ -48,13 +48,33 @@
             android:name=".ConnectedArtisant"
             android:label="@string/title_activity_connected"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".SignInFG" />
-        <activity android:name=".ParametreC" />
-        <activity android:name=".ParametreA" />
-        <activity android:name=".ModifierC" />
-        <activity android:name=".ModifierA" />
-        <activity android:name=".InsertProduct" />
-        <activity android:name=".ListeProduitArt"></activity>
+        <activity
+            android:name=".SignInFG"
+            android:label="Inscription" />
+        <activity
+            android:name=".ParametreC"
+            android:label="Deconnexion" />
+        <activity
+            android:name=".ParametreA"
+            android:label="Deconnexion" />
+        <activity
+            android:name=".ModifierC"
+            android:label="Modifier Profil" />
+        <activity
+            android:name=".ModifierA"
+            android:label="Modifier Profil" />
+        <activity
+            android:name=".InsertProduct"
+            android:label="Nouveau Produit" />
+        <activity
+            android:name=".ListeProduitArt"
+            android:label="Liste des Produits" />
+        <activity
+            android:name=".CmderProduit"
+            android:label="Commander Produits" />
+        <activity
+            android:name=".ModSuppProduit"
+            android:label="Modifier / Supprimer Produit"></activity>
     </application>
 
 </manifest>

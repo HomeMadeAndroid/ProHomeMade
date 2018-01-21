@@ -2,9 +2,7 @@ package com.example.manel.prohomemade;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -36,14 +34,14 @@ public class ConnectedArtisant extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        /*FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
-        });
+        });*/
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -150,8 +148,12 @@ public class ConnectedArtisant extends AppCompatActivity
             startActivity(intent);
         } else if (id == R.id.nav_actualite) {
             // consulter les cmds
+
+
         } else if (id == R.id.nav_slideshow) {
             // ajouter video
+
+
         } else if (id == R.id.nav_manage) {
             // modifier profil
             Intent intent = new Intent(getApplicationContext(), ModifierA.class);
