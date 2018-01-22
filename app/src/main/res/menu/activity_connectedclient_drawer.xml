@@ -7,7 +7,11 @@
         <item
             android:id="@+id/nav_actualite"
             android:icon="@drawable/ic_menu_gallery"
-            android:title="Actualitée" />
+            android:title="Commandee Produit" />
+        <item
+            android:id="@+id/nav_manage"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="Modifier Profil" />
         <item
             android:id="@+id/nav_camera"
             android:icon="@drawable/ic_menu_camera"
@@ -16,10 +20,6 @@
             android:id="@+id/nav_slideshow"
             android:icon="@drawable/ic_menu_slideshow"
             android:title="Consulter Videos" />
-        <item
-            android:id="@+id/nav_manage"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="Modifier Profil" />
     </group>
 
     <!--<item android:title="Communicate">

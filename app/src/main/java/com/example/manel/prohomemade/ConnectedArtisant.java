@@ -14,6 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
@@ -134,9 +135,21 @@ public class ConnectedArtisant extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
+        if (id == R.id.nav_send) {
+            //Liste des produits
+            Intent intent = new Intent(getApplicationContext(), ListeProduitArt.class);
+            intent.putExtra("nom", name);
+            intent.putExtra("prenom", prename);
+            intent.putExtra("tel", tel);
+            intent.putExtra("email", email);
+            intent.putExtra("password", password);
+            intent.putExtra("matfisc", matfisc);
+            intent.putExtra("account", accnt);
+            startActivity(intent);
+
+        } else if (id == R.id.nav_camera) {
             // Handle the camera action
-            // ajouter produit
+            // ajouter nouveau produit
             Intent intent = new Intent(getApplicationContext(), InsertProduct.class);
             intent.putExtra("nom", name);
             intent.putExtra("prenom", prename);
@@ -146,13 +159,6 @@ public class ConnectedArtisant extends AppCompatActivity
             intent.putExtra("matfisc", matfisc);
             intent.putExtra("account", accnt);
             startActivity(intent);
-        } else if (id == R.id.nav_actualite) {
-            // consulter les cmds
-
-
-        } else if (id == R.id.nav_slideshow) {
-            // ajouter video
-
 
         } else if (id == R.id.nav_manage) {
             // modifier profil
@@ -166,18 +172,14 @@ public class ConnectedArtisant extends AppCompatActivity
             intent.putExtra("account", accnt);
             startActivity(intent);
             //} else if (id == R.id.nav_share) {
+        } else if (id == R.id.nav_actualite) {
+            // consulter les cmds
+            //*********************************************************************
 
-        } else if (id == R.id.nav_send) {
-            //Liste des produits
-            Intent intent = new Intent(getApplicationContext(), ListeProduitArt.class);
-            intent.putExtra("nom", name);
-            intent.putExtra("prenom", prename);
-            intent.putExtra("tel", tel);
-            intent.putExtra("email", email);
-            intent.putExtra("password", password);
-            intent.putExtra("matfisc", matfisc);
-            intent.putExtra("account", accnt);
-            startActivity(intent);
+
+        } else if (id == R.id.nav_slideshow) {
+            // ajouter video
+            Toast.makeText(getApplicationContext(), "prespective ...", Toast.LENGTH_LONG);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

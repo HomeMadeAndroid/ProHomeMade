@@ -12,7 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.example.manel.prohomemade.Adapter.RcvProduit2;
+import com.example.manel.prohomemade.Adapter.RcvProduit;
 import com.example.manel.prohomemade.model.ListProduit;
 import com.example.manel.prohomemade.service.APIService;
 import com.google.gson.Gson;
@@ -31,19 +31,19 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class FirstPageConnectedClient extends Fragment {
     RecyclerView recyclerView;
     View myview;
-    String nom, prenom, email, password, account;
+    //String nom, prenom, email, password, account;
     int tel;
-    private RcvProduit2 rcvProduit;
+    private RcvProduit rcvProduit;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        nom = getArguments().getString("nom");
-        prenom = getArguments().getString("prenom");
-        tel = getArguments().getInt("tel");
-        email = getArguments().getString("email");
-        password = getArguments().getString("password");
-        account = getArguments().getString("account");
+        //nom = getArguments().getString("nom");
+        //prenom = getArguments().getString("prenom");
+        //tel = getArguments().getInt("tel");
+        //email = getArguments().getString("email");
+        //password = getArguments().getString("password");
+        //account = getArguments().getString("account");
         myview = inflater.inflate(R.layout.displayproduit, container, false);
         return myview;
     }
@@ -71,9 +71,8 @@ public class FirstPageConnectedClient extends Fragment {
                 ListProduit listProduct = response.body();
                 if (listProduct.getStatus() == 1) {
                     Log.d("erreur: ", listProduct.getListP().toString());
-                    Log.d("noooooom pp produitt", "" + nom);
-                    rcvProduit = new RcvProduit2(getActivity(), listProduct.getListP(), "client", nom,
-                            prenom, tel, email, password, account);
+                    //Log.d("noooooom pp produitt", "" + nom);
+                    rcvProduit = new RcvProduit(getActivity(), listProduct.getListP(), "client");
                     recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
                     recyclerView.setItemAnimator(new DefaultItemAnimator());
                     recyclerView.setAdapter(rcvProduit);

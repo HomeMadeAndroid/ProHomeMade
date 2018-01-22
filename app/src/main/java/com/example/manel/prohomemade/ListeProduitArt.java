@@ -9,7 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.example.manel.prohomemade.Adapter.RcvProduit;
+import com.example.manel.prohomemade.Adapter.RcvProduit3;
 import com.example.manel.prohomemade.model.ListProduit;
 import com.example.manel.prohomemade.service.APIService;
 import com.google.gson.Gson;
@@ -27,7 +27,7 @@ public class ListeProduitArt extends AppCompatActivity {
     String name, prename, matfisc;
     int tel;
     String email, password, account;
-    private RcvProduit rcvProduit;
+    private RcvProduit3 rcvProduit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,7 +70,8 @@ public class ListeProduitArt extends AppCompatActivity {
                 ListProduit listProduct = response.body();
                 if (listProduct.getStatus() == 1) {
                     Log.d("erreur: ", listProduct.getListP().toString());
-                    rcvProduit = new RcvProduit(getApplicationContext(), listProduct.getListP(), "art");
+                    rcvProduit = new RcvProduit3(getApplicationContext(), listProduct.getListP(), "art", name, prename, tel,
+                            email, password, account, matfisc);
                     recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
                     recyclerView.setItemAnimator(new DefaultItemAnimator());
                     recyclerView.setAdapter(rcvProduit);

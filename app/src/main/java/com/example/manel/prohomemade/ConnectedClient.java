@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
@@ -151,7 +152,7 @@ public class ConnectedClient extends AppCompatActivity
         if (id == R.id.nav_actualite) {
             // Handle the camera action
             // actualitee
-            //passer commande
+            // commandee produit
             Intent intent = new Intent(getApplicationContext(), ListeProduit.class);
             intent.putExtra("nom", name);
             intent.putExtra("prenom", prename);
@@ -172,14 +173,6 @@ public class ConnectedClient extends AppCompatActivity
             fragmentManager.beginTransaction()
                     .replace(R.id.content_frame, firstPageConnectedClient)
                     .commit();*/
-        } else if (id == R.id.nav_camera) {
-            // panier
-
-
-        } else if (id == R.id.nav_slideshow) {
-            // consulter video
-
-
         } else if (id == R.id.nav_manage) {
             // modifier profil
             Intent intent = new Intent(getApplicationContext(), ModifierC.class);
@@ -190,6 +183,16 @@ public class ConnectedClient extends AppCompatActivity
             intent.putExtra("password", password);
             intent.putExtra("account", accnt);
             startActivity(intent);
+
+        } else if (id == R.id.nav_camera) {
+            // panier
+
+            //****************************************************************************
+
+        } else if (id == R.id.nav_slideshow) {
+            // consulter video
+
+            Toast.makeText(getApplicationContext(), "prespective ...", Toast.LENGTH_LONG);
             //} else if (id == R.id.nav_share) {
 
             //} else if (id == R.id.nav_send) {
