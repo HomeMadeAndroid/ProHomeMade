@@ -29,6 +29,11 @@ public class ModifierClient {
 
     public boolean modifierClient(String nom, String prenom, int tel, String emailc, String passwordc) {
 
+        Log.d("nom mclient", nom);
+        Log.d("prenom mclient", prenom);
+        Log.d("tel mclient", "" + tel);
+        Log.d("oldmail mclient", emailc);
+        Log.d("oldpass mclient", passwordc);
         Gson gson = new GsonBuilder()
                 .setLenient()
                 .create();
