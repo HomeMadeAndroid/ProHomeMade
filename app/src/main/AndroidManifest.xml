@@ -74,7 +74,8 @@
             android:label="Commander Produits" />
         <activity
             android:name=".ModSuppProduit"
-            android:label="Modifier / Supprimer Produit"></activity>
+            android:label="Modifier / Supprimer Produit" />
+        <activity android:name=".ListeProduit"></activity>
     </application>
 
 </manifest>

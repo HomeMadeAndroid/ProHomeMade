@@ -27,7 +27,7 @@ public class CreateCmd {
         this.b = b;
     }
 
-    public boolean createCmd(String email, String password, int idProd, int qte) {
+    public boolean createCmd(final String email, final String password, final int idProd, final int qte) {
 
         Gson gson = new GsonBuilder()
                 .setLenient()
@@ -42,7 +42,12 @@ public class CreateCmd {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
                 String ress = response.body();
-                if (ress.matches("succe")) {
+                Log.d("ressssssss", ress);
+                Log.d("resssssssse", email);
+                Log.d("ressssssssp", password);
+                Log.d("ressssssssi", "" + idProd);
+                Log.d("ressssssssq", "" + qte);
+                if (ress.matches("lignecmd")) {
                     setB(true);
                     Log.d("create cmd succe", "valide Request");
                 } else {

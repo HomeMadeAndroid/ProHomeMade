@@ -36,9 +36,18 @@ public class ConnectedClient extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        Bundle bundle = new Bundle();
+        bundle.putString("nom", name);
+        bundle.putString("prenom", prename);
+        bundle.putInt("tel", tel);
+        bundle.putString("email", email);
+        bundle.putString("password", password);
+        bundle.putString("account", accnt);
+        FirstPageConnectedClient firstPageConnectedClient = new FirstPageConnectedClient();
+        firstPageConnectedClient.setArguments(bundle);
         FragmentManager fragmentManager = getFragmentManager();
         fragmentManager.beginTransaction()
-                .replace(R.id.content_frame, new FirstPageConnectedClient())
+                .replace(R.id.content_frame, firstPageConnectedClient)
                 .commit();
 
         /*FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -142,9 +151,27 @@ public class ConnectedClient extends AppCompatActivity
         if (id == R.id.nav_actualite) {
             // Handle the camera action
             // actualitee
+            //passer commande
+            Intent intent = new Intent(getApplicationContext(), ListeProduit.class);
+            intent.putExtra("nom", name);
+            intent.putExtra("prenom", prename);
+            intent.putExtra("tel", tel);
+            intent.putExtra("email", email);
+            intent.putExtra("password", password);
+            intent.putExtra("account", accnt);
+            startActivity(intent);
+           /* Bundle bundle = new Bundle();
+            bundle.putString("nom", name);
+            bundle.putString("prenom", prename);
+            bundle.putInt("tel", tel);
+            bundle.putString("email", email);
+            bundle.putString("password", password);
+            bundle.putString("account", accnt);
+            FirstPageConnectedClient firstPageConnectedClient = new FirstPageConnectedClient();
+            firstPageConnectedClient.setArguments(bundle);
             fragmentManager.beginTransaction()
-                    .replace(R.id.content_frame, new FirstPageConnectedClient())
-                    .commit();
+                    .replace(R.id.content_frame, firstPageConnectedClient)
+                    .commit();*/
         } else if (id == R.id.nav_camera) {
             // panier
 

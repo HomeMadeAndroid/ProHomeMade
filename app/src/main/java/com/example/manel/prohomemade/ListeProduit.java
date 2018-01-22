@@ -1,15 +1,12 @@
 package com.example.manel.prohomemade;
 
-import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.manel.prohomemade.Adapter.RcvProduit2;
@@ -24,34 +21,33 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-/**
- * Created by manel on 21/01/2018.
- */
+public class ListeProduit extends AppCompatActivity {
 
-public class FirstPageConnectedClient extends Fragment {
     RecyclerView recyclerView;
-    View myview;
     String nom, prenom, email, password, account;
     int tel;
     private RcvProduit2 rcvProduit;
 
-    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        nom = getArguments().getString("nom");
-        prenom = getArguments().getString("prenom");
-        tel = getArguments().getInt("tel");
-        email = getArguments().getString("email");
-        password = getArguments().getString("password");
-        account = getArguments().getString("account");
-        myview = inflater.inflate(R.layout.displayproduit, container, false);
-        return myview;
-    }
-
-    @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        recyclerView = (RecyclerView) getView().findViewById(R.id.rcvProduit);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_liste_produit);
+        Intent intent = getIntent();
+        Bundle b = intent.getExtras();
+        if (b != null) {
+            nom = (String) b.get("nom");
+            prenom = (String) b.get("prenom");
+            tel = b.getInt("tel");
+            email = (String) b.get("email");
+            password = (String) b.get("password");
+            account = (String) b.get("account");
+            Log.d("nameclient a modifier", nom);
+            Log.d("prenomclient a modifier", prenom);
+            Log.d("emailclient a modifier", email);
+            Log.d("telclient a modifier", String.valueOf(tel));
+            Log.d("pswclient a modifier", password);
+        }
+        recyclerView = (RecyclerView) findViewById(R.id.rcvProduit);
         LoadDataProduit();
     }
 
@@ -72,19 +68,19 @@ public class FirstPageConnectedClient extends Fragment {
                 if (listProduct.getStatus() == 1) {
                     Log.d("erreur: ", listProduct.getListP().toString());
                     Log.d("noooooom pp produitt", "" + nom);
-                    rcvProduit = new RcvProduit2(getActivity(), listProduct.getListP(), "client", nom,
+                    rcvProduit = new RcvProduit2(getApplicationContext(), listProduct.getListP(), "client", nom,
                             prenom, tel, email, password, account);
-                    recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+                    recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
                     recyclerView.setItemAnimator(new DefaultItemAnimator());
                     recyclerView.setAdapter(rcvProduit);
                 } else {
-                    Toast.makeText(getActivity(), "hjhj " + listProduct.getMsg(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "hjhj " + listProduct.getMsg(), Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<ListProduit> call, Throwable t) {
-                Toast.makeText(getActivity(), t.getMessage(), Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_LONG).show();
                 Log.d("erreur: ", t.getMessage());
             }
         });
