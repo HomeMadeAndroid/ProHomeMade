@@ -6,16 +6,18 @@ import java.util.List;
  * Created by manel on 23/01/2018.
  */
 
-public class ListeCmd {
-    private List<Cmd> listCmd;
+public class LigneCmd {
+    List<Cmd> listCmd;
+    List<Produit> listP;
     private String msg;
     private int status;
 
-    public ListeCmd() {
+    public LigneCmd() {
     }
 
-    public ListeCmd(List<Cmd> listCmd, String msg, int status) {
+    public LigneCmd(List<Cmd> listCmd, List<Produit> listP, String msg, int status) {
         this.listCmd = listCmd;
+        this.listP = listP;
         this.msg = msg;
         this.status = status;
     }
@@ -26,6 +28,14 @@ public class ListeCmd {
 
     public void setListCmd(List<Cmd> listCmd) {
         this.listCmd = listCmd;
+    }
+
+    public List<Produit> getListP() {
+        return listP;
+    }
+
+    public void setListP(List<Produit> listP) {
+        this.listP = listP;
     }
 
     public String getMsg() {

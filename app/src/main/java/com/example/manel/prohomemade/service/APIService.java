@@ -4,6 +4,7 @@ import com.example.manel.prohomemade.model.Artisant;
 import com.example.manel.prohomemade.model.Client;
 import com.example.manel.prohomemade.model.ListPays;
 import com.example.manel.prohomemade.model.ListProduit;
+import com.example.manel.prohomemade.model.ListeCmd;
 
 import retrofit2.Call;
 import retrofit2.http.Field;
@@ -116,4 +117,9 @@ public interface APIService {
     @FormUrlEncoded
     @POST("DeleteProduit.php")
     Call<String> DeleteProduit(@Field("idprod") int idProd);
+
+    @FormUrlEncoded
+    @POST("ConsulterCmd.php")
+    Call<ListeCmd> ConsultCmd(@Field("email") String email,
+                              @Field("password") String password);
 }

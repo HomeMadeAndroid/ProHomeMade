@@ -15,7 +15,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
@@ -184,15 +183,15 @@ public class ConnectedClient extends AppCompatActivity
             intent.putExtra("account", accnt);
             startActivity(intent);
 
-        } else if (id == R.id.nav_camera) {
+            //} else if (id == R.id.nav_camera) {
             // panier
 
             //****************************************************************************
 
-        } else if (id == R.id.nav_slideshow) {
+            //} else if (id == R.id.nav_slideshow) {
             // consulter video
 
-            Toast.makeText(getApplicationContext(), "prespective ...", Toast.LENGTH_LONG);
+            //Toast.makeText(getApplicationContext(), "prespective ...", Toast.LENGTH_LONG);
             //} else if (id == R.id.nav_share) {
 
             //} else if (id == R.id.nav_send) {

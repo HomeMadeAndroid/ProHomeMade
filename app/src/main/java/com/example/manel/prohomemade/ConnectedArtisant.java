@@ -14,7 +14,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
@@ -174,12 +173,16 @@ public class ConnectedArtisant extends AppCompatActivity
             //} else if (id == R.id.nav_share) {
         } else if (id == R.id.nav_actualite) {
             // consulter les cmds
-            //*********************************************************************
+            Intent intent = new Intent(getApplicationContext(), ConsulterCmd.class);
+            intent.putExtra("nom", name);
+            intent.putExtra("prenom", prename);
+            intent.putExtra("tel", tel);
+            intent.putExtra("email", email);
+            intent.putExtra("password", password);
+            intent.putExtra("matfisc", matfisc);
+            intent.putExtra("account", accnt);
+            startActivity(intent);
 
-
-        } else if (id == R.id.nav_slideshow) {
-            // ajouter video
-            Toast.makeText(getApplicationContext(), "prespective ...", Toast.LENGTH_LONG);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
