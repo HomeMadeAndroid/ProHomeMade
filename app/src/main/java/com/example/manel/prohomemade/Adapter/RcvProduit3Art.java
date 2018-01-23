@@ -9,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.manel.prohomemade.CmderProduit;
 import com.example.manel.prohomemade.ModSuppProduit;
 import com.example.manel.prohomemade.R;
 import com.example.manel.prohomemade.model.Produit;
@@ -20,16 +19,17 @@ import java.util.List;
  * Created by manel on 22/01/2018.
  */
 
-public class RcvProduit2 extends RecyclerView.Adapter<RcvProduit2.ViewHolder> {
+public class RcvProduit3Art extends RecyclerView.Adapter<RcvProduit3Art.ViewHolder> {
+
     Context context;
     List<Produit> listP;
-    String cnt, nom, prenom, email, password, account;
+    String cnt, nom, prenom, email, password, account, matfisc;
     int tel;
     String idprodd;
 
-    public RcvProduit2(Context context, List<Produit> listP, String cnt,
-                       String nom, String prenom, int tel, String email,
-                       String password, String account) {
+    public RcvProduit3Art(Context context, List<Produit> listP, String cnt,
+                          String nom, String prenom, int tel, String email,
+                          String password, String account, String matfisc) {
         this.context = context;
         this.listP = listP;
         this.cnt = cnt;
@@ -39,17 +39,18 @@ public class RcvProduit2 extends RecyclerView.Adapter<RcvProduit2.ViewHolder> {
         this.email = email;
         this.password = password;
         this.account = account;
+        this.matfisc = matfisc;
     }
 
     @Override
-    public RcvProduit2.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public RcvProduit3Art.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.produititem, parent, false);
-        RcvProduit2.ViewHolder holder = new RcvProduit2.ViewHolder(v);
+        RcvProduit3Art.ViewHolder holder = new RcvProduit3Art.ViewHolder(v);
         return holder;
     }
 
     @Override
-    public void onBindViewHolder(RcvProduit2.ViewHolder holder, int position) {
+    public void onBindViewHolder(RcvProduit3Art.ViewHolder holder, int position) {
         Produit produit = listP.get(position);
         holder.txtid.setText(String.valueOf(produit.getId()));
         Log.d("id produitt", "" + produit.getId());
@@ -71,7 +72,6 @@ public class RcvProduit2 extends RecyclerView.Adapter<RcvProduit2.ViewHolder> {
         Log.d("disp produitt", "" + produit.getDispo());
         holder.txtimg.setText(produit.getImg());
         Log.d("img produitt", "" + produit.getImg());
-
     }
 
     @Override
@@ -109,23 +109,19 @@ public class RcvProduit2 extends RecyclerView.Adapter<RcvProduit2.ViewHolder> {
             // details produit
             //Intent intent = new Intent(context, Logactivity.class);
             //context.startActivity(intent);
-            if (cnt.matches("art")) {
-                Intent intent = new Intent(context, ModSuppProduit.class);
-                intent.putExtra("idProd", txtid.getText().toString());
-                context.startActivity(intent);
-            } else {
-                Intent intent = new Intent(context, CmderProduit.class);
-                intent.putExtra("idProd", idprodd);
-                intent.putExtra("nom", nom);
-                intent.putExtra("prenom", prenom);
-                intent.putExtra("tel", tel);
-                intent.putExtra("email", email);
-                intent.putExtra("password", password);
-                intent.putExtra("account", account);
-                Log.d("idProd intenttt", idprodd);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                context.startActivity(intent);
-            }
+            Intent intent = new Intent(context, ModSuppProduit.class);
+            intent.putExtra("idProd", idprodd);
+            intent.putExtra("nom", nom);
+            intent.putExtra("prenom", prenom);
+            intent.putExtra("tel", tel);
+            intent.putExtra("email", email);
+            intent.putExtra("password", password);
+            intent.putExtra("account", account);
+            intent.putExtra("matfisc", matfisc);
+            Log.d("idProd intenttt", idprodd);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            context.startActivity(intent);
+
         }
     }
 }
