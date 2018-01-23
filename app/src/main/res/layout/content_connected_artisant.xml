@@ -8,4 +8,21 @@
     tools:context="com.example.manel.prohomemade.ConnectedArtisant"
     tools:showIn="@layout/app_bar_connected_artisant">
 
+    <TextView
+        android:id="@+id/txtshownewcmd"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/andada"
+        android:gravity="top|bottom|center_vertical|fill_vertical|center"
+        android:text="Il y a des Nouveau Commande a consulter"
+        android:textSize="50sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 </android.support.constraint.ConstraintLayout>

@@ -88,6 +88,15 @@ public interface APIService {
                                 @Field("passwordc") String passwordc);
 
     @FormUrlEncoded
+    @POST("ModifierProduit.php")
+    Call<String> ModifierProduit(@Field("nom") String nom,
+                                 @Field("idprod") int idProd,
+                                 @Field("descri") String descri,
+                                 @Field("catg") String catg,
+                                 @Field("prix") float prix,
+                                 @Field("dispo") String dispo);
+
+    @FormUrlEncoded
     @POST("insertProduit.php")
     Call<String> Createproduct(@Field("nom") String nom,
                                @Field("descri") String descri,
@@ -103,4 +112,8 @@ public interface APIService {
                            @Field("password") String password,
                            @Field("idProd") int idProd,
                            @Field("qte") int qte);
+
+    @FormUrlEncoded
+    @POST("DeleteProduit.php")
+    Call<String> DeleteProduit(@Field("idprod") int idProd);
 }

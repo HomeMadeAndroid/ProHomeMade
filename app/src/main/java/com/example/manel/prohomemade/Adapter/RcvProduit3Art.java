@@ -25,7 +25,7 @@ public class RcvProduit3Art extends RecyclerView.Adapter<RcvProduit3Art.ViewHold
     List<Produit> listP;
     String cnt, nom, prenom, email, password, account, matfisc;
     int tel;
-    String idprodd;
+    String idprodd, nompp, catg, desc, prix, dispo;
 
     public RcvProduit3Art(Context context, List<Produit> listP, String cnt,
                           String nom, String prenom, int tel, String email,
@@ -58,18 +58,23 @@ public class RcvProduit3Art extends RecyclerView.Adapter<RcvProduit3Art.ViewHold
         holder.txtidArt.setText(String.valueOf(produit.getIdArt()));
         Log.d("idArt produitt", "" + produit.getIdArt());
         holder.txtnom.setText(produit.getNom());
+        nompp = produit.getNom();
         Log.d("nom produitt", "" + produit.getNom());
         holder.txtdescri.setText(produit.getDescri());
         Log.d("descri produitt", "" + produit.getDescri());
+        desc = produit.getDescri();
         holder.txtcatg.setText(produit.getCatg());
         Log.d("catg produitt", "" + produit.getCatg());
+        catg = produit.getCatg();
         holder.txtprix.setText(String.valueOf(produit.getPrix()));
         Log.d("prix produitt", "" + produit.getPrix());
+        prix = String.valueOf(produit.getPrix());
         holder.txtdateProd.setText(produit.getDateProd());
         Log.d("date produitt", "" + produit.getDateProd());
         //Log.d("noooooom produitt", "" + nom);
         holder.txtdispo.setText(produit.getDispo());
         Log.d("disp produitt", "" + produit.getDispo());
+        dispo = produit.getDispo();
         holder.txtimg.setText(produit.getImg());
         Log.d("img produitt", "" + produit.getImg());
     }
@@ -111,6 +116,11 @@ public class RcvProduit3Art extends RecyclerView.Adapter<RcvProduit3Art.ViewHold
             //context.startActivity(intent);
             Intent intent = new Intent(context, ModSuppProduit.class);
             intent.putExtra("idProd", idprodd);
+            intent.putExtra("nomp", nompp);
+            intent.putExtra("catgp", catg);
+            intent.putExtra("descp", desc);
+            intent.putExtra("prixp", prix);
+            intent.putExtra("dispop", dispo);
             intent.putExtra("nom", nom);
             intent.putExtra("prenom", prenom);
             intent.putExtra("tel", tel);

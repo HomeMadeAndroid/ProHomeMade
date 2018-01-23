@@ -93,7 +93,7 @@ public class InsertProduct extends AppCompatActivity implements AdapterView.OnIt
 
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
-
+        Toast.makeText(getApplicationContext(), "Selecte une categorie ", Toast.LENGTH_LONG).show();
     }
 
     public void InsertProduit(View view) {
