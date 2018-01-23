@@ -133,7 +133,6 @@ public class ModSuppProduit extends AppCompatActivity implements AdapterView.OnI
     }
 
     public void SupprimerProduit(View view) {
-
         try {
             int idp = Integer.parseInt(idprod);
             supprimerProduit = new SupprimerProduit();
