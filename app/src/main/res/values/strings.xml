@@ -35,7 +35,6 @@
     <string name="designtxt">Design...</string>
     <string name="prompt_tel">Téléphone</string>
 
-
     <string-array name="labels_array">
         <item>Accessoires</item>
         <item>Decoration</item>
